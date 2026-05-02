@@ -1,0 +1,26 @@
+{
+  "enabled": true,
+  "name": "Prettier Format on Save",
+  "description": "Automatically formats code files using Prettier whenever a supported file is saved",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.js",
+      "*.jsx",
+      "*.ts",
+      "*.tsx",
+      "*.css",
+      "*.scss",
+      "*.html",
+      "*.json",
+      "*.md",
+      "*.yaml",
+      "*.yml"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npx prettier --write \"${file}\""
+  }
+}
