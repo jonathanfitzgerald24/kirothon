@@ -13,17 +13,23 @@ export interface LoginPayload {
 }
 
 export const authApi = {
-  register: (payload: RegisterPayload) =>
-    apiPost<User>('/auth/register', payload),
+  register: async (payload: RegisterPayload): Promise<User> => {
+    const res = await apiPost<{ user: User }>('/auth/register', payload);
+    return res.user;
+  },
 
-  login: (payload: LoginPayload) =>
-    apiPost<User>('/auth/login', payload),
+  login: async (payload: LoginPayload): Promise<User> => {
+    const res = await apiPost<{ user: User }>('/auth/login', payload);
+    return res.user;
+  },
 
   logout: () =>
     apiPost<void>('/auth/logout'),
 
-  me: () =>
-    apiGet<User>('/auth/me'),
+  me: async (): Promise<User> => {
+    const res = await apiGet<{ user: User }>('/auth/me');
+    return res.user;
+  },
 
   googleAuthUrl: () => `/api/v1/auth/google`,
 };
