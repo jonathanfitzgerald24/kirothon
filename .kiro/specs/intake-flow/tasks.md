@@ -23,7 +23,7 @@ git pull
 - [x] 2.8 Define `FileMeta` model: id, clubId (FK), categoryId (FK nullable), driveFileId, name, mimeType, sizeBytes (BigInt), uploaderId (FK nullable), placementStatus, confidenceScore, routingExplanation, aiSummary, uploadNote (VarChar 280), isUnmanaged, driveLastModified, uploadedAt, timestamps
 - [x] 2.9 Define `Tag` model: id, name, fileId (FK with cascade delete), autoGen boolean; unique constraint on (fileId, name)
 - [x] 2.10 Define `Favorite` model: id, userId (FK), fileId (FK with cascade delete), createdAt; unique constraint on (userId, fileId)
-- [ ] 2.11 Define `QuickAccessFile` model: id, clubId, fileId (unique, FK with cascade delete), sortOrder, createdAt
+- [x] 2.11 Define `QuickAccessFile` model: id, clubId, fileId (unique, FK with cascade delete), sortOrder, createdAt
 - [ ] 2.12 Define `AuditLog` model: id, clubId (FK), userId (FK nullable), action, resourceType, resourceId, details (Json), createdAt; indexes on (clubId, createdAt), (clubId, action), (clubId, userId)
 - [ ] 2.13 Define `Invitation` model: id, clubId (FK), email, role, token (unique), expiresAt, usedAt, createdAt
 - [ ] 2.14 Define `Notification` model: id, clubId (FK), userId (FK), type, title, body, resourceId, isRead, isDismissed, createdAt; index on (userId, isRead, createdAt)
