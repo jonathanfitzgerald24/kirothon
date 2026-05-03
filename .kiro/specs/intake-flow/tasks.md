@@ -277,7 +277,7 @@ git pull
 - [x] 20.3 Create `ClubActivityDashboard` component (Admin only): total files, uploads last 30 days, top 3 uploaders, unresolved items count; omit zero-value widgets
 - [x] 20.4 Create `NotificationBell` component: bell icon with unread count badge
 - [x] 20.5 Create `NotificationCenter` component: dropdown panel listing notifications with type icon, title, body, timestamp, read/dismiss actions; real-time updates via SSE
-- [ ] 20.6 Create `SetupWizard` component: four-step stepper (Connect Drive, Analyze Structure, Approve Architecture, Invite Team), locked progression, progress indicator, club type selector in step 3
+- [x] 20.6 Create `SetupWizard` component: four-step stepper (Connect Drive, Analyze Structure, Approve Architecture, Invite Team), locked progression, progress indicator, club type selector in step 3
 - [ ] 20.7 Create `FirstLoginOrientation` component: spotlight overlay highlighting folder tree, search bar, Quick Access; auto-dismiss after 20 seconds or on click; shown once per user
 - [ ] 20.8 Create `UserSettings` component: dark mode toggle, profile info display
 - [ ] 20.9 Create `NewBadge` component: "New" indicator on files/folders added/modified since user's last login, visible for up to 7 days, dismissed on view
