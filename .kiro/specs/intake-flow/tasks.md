@@ -48,7 +48,7 @@ git pull
 - [x] 3.10 Create `auth` middleware: validate session exists and is not expired, attach user to request
 - [x] 3.11 Create `requireRole(minimumRole)` middleware: check `roleLevel(user.role) >= roleLevel(minimumRole)`, return 403 if insufficient
 - [x] 3.12 Create `validate(schema)` middleware: validate request body/query/params against a zod schema, return 400 with structured error on failure
-- [ ] 3.13 Configure CSRF protection via `csurf` middleware for all state-changing routes
+- [x] 3.13 Configure CSRF protection via `csurf` middleware for all state-changing routes
 - [ ] 3.14 Write property-based test for P6 (Session Expiry Enforcement): generate random session ages, verify sessions older than 24 hours are rejected
 
 
