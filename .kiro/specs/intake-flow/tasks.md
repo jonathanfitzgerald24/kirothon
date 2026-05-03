@@ -259,7 +259,7 @@ git pull
 - [x] 19.5 Create `FileDetailView` component: file preview (inline for supported types via iframe/pdf.js), metadata, uploader attribution, upload note, AI summary, tags, "Why here?" tooltip, "Files Like This" sidebar
 - [x] 19.6 Create `TimelineView` component: files in reverse chronological order grouped by month, folder and tag filters
 - [x] 19.7 Create `UploadFlow` component: file picker with drag-and-drop zone, optional upload note input (280 char limit), progress bar
-- [ ] 19.8 Create `RoutingResultScreen` component: show auto-placement result, rename suggestion, duplicate warning, confirm/override actions
+- [x] 19.8 Create `RoutingResultScreen` component: show auto-placement result, rename suggestion, duplicate warning, confirm/override actions
 - [ ] 19.9 Create `BulkRoutingReview` component: three-tier grouping (auto-placed, needs selection, no match) for batch uploads
 - [ ] 19.10 Create `DragDropZone` component: overlay on folder views accepting dragged files, triggers direct upload to that folder
 - [ ] 19.11 Create `SearchInput` component: search bar with 2-character minimum, semantic search toggle
