@@ -1,5 +1,5 @@
 {
-  "enabled": true,
+  "enabled": false,
   "name": "Auto-pull Before Task",
   "description": "Automatically pulls the latest changes from the remote before starting a new spec task, keeping both computers in sync",
   "version": "1",

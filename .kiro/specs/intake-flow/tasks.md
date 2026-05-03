@@ -36,7 +36,7 @@ git pull
 
 ## Task 3: Authentication and Session Management (Req 1, 19)
 
-- [ ] 3.1 Install auth dependencies: `passport`, `passport-local`, `passport-google-oauth20`, `bcrypt`, `express-session`, `connect-pg-simple`, `csurf`, `zod`
+- [x] 3.1 Install auth dependencies: `passport`, `passport-local`, `passport-google-oauth20`, `bcrypt`, `express-session`, `connect-pg-simple`, `csurf`, `zod`
 - [ ] 3.2 Configure `express-session` with `connect-pg-simple` store, 24-hour `maxAge`, `httpOnly`, `secure`, `sameSite: lax` cookie settings
 - [ ] 3.3 Implement Passport local strategy: validate email/password against `User` table using bcrypt compare
 - [ ] 3.4 Implement Passport Google OAuth strategy: handle new user creation, existing account linking, and pending invitation matching (Req 19)
