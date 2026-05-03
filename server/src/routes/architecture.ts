@@ -1,11 +1,12 @@
 import { Router, Request, Response } from 'express'
-import { requireRole } from '../middleware/auth'
-import { AIArchitect } from '../services/aiArchitect'
+import { requireRole, requireAuth } from '../middleware/auth'
+import { AIArchitect, FolderNode } from '../services/aiArchitect'
+import { ArchitectureService } from '../services/architectureService'
 import { Role } from '@prisma/client'
 
 export const architectureRouter = Router()
 
-// POST /api/v1/architecture/propose — generate proposals
+// POST /api/v1/architecture/propose
 architectureRouter.post(
   '/propose',
   requireRole(Role.ADMIN),
@@ -15,15 +16,15 @@ architectureRouter.post(
       const architect = new AIArchitect(user.clubId)
       const proposals = await architect.generateProposals()
       res.json({ proposals })
-    } catch (err) {
-      res
-        .status(500)
-        .json({ error: { code: 'PROPOSAL_FAILED', message: 'Failed to generate architecture proposals' } })
+    } catch {
+      res.status(500).json({
+        error: { code: 'PROPOSAL_FAILED', message: 'Failed to generate architecture proposals' },
+      })
     }
   }
 )
 
-// GET /api/v1/architecture/proposals — get cached proposals
+// GET /api/v1/architecture/proposals
 architectureRouter.get(
   '/proposals',
   requireRole(Role.ADMIN),
@@ -31,7 +32,6 @@ architectureRouter.get(
     const user = req.user as { clubId: string }
     const architect = new AIArchitect(user.clubId)
     const proposals = architect.getProposals()
-
     if (!proposals) {
       res.status(404).json({
         error: {
@@ -41,7 +41,186 @@ architectureRouter.get(
       })
       return
     }
-
     res.json({ proposals })
+  }
+)
+
+// POST /api/v1/architecture/select — select proposal as draft (7.2)
+architectureRouter.post(
+  '/select',
+  requireRole(Role.ADMIN),
+  async (req: Request, res: Response): Promise<void> => {
+    const user = req.user as { clubId: string }
+    const { proposalId, tree } = req.body as { proposalId: string; tree: FolderNode[] }
+    if (!proposalId || !tree) {
+      res.status(400).json({ error: { code: 'INVALID_INPUT', message: 'proposalId and tree are required' } })
+      return
+    }
+    try {
+      const service = new ArchitectureService(user.clubId)
+      await service.selectProposal(proposalId, tree)
+      res.json({ message: 'Proposal selected as draft', proposalId })
+    } catch {
+      res.status(500).json({ error: { code: 'SELECT_FAILED', message: 'Failed to select proposal' } })
+    }
+  }
+)
+
+// PUT /api/v1/architecture/draft — update draft (7.3)
+architectureRouter.put(
+  '/draft',
+  requireRole(Role.ADMIN),
+  (req: Request, res: Response): void => {
+    const user = req.user as { clubId: string }
+    const { tree } = req.body as { tree: FolderNode[] }
+    if (!tree) {
+      res.status(400).json({ error: { code: 'INVALID_INPUT', message: 'tree is required' } })
+      return
+    }
+    try {
+      const service = new ArchitectureService(user.clubId)
+      const updated = service.updateDraft(tree)
+      res.json({ tree: updated })
+    } catch {
+      res.status(404).json({ error: { code: 'NO_DRAFT', message: 'No draft found' } })
+    }
+  }
+)
+
+// GET /api/v1/architecture/draft/preview — get draft preview (7.4)
+architectureRouter.get(
+  '/draft/preview',
+  requireRole(Role.ADMIN),
+  (req: Request, res: Response): void => {
+    const user = req.user as { clubId: string }
+    const service = new ArchitectureService(user.clubId)
+    const draft = service.getDraft()
+    if (!draft) {
+      res.status(404).json({ error: { code: 'NO_DRAFT', message: 'No draft found' } })
+      return
+    }
+    res.json({ tree: draft })
+  }
+)
+
+// POST /api/v1/architecture/activate — activate draft (7.6)
+architectureRouter.post(
+  '/activate',
+  requireRole(Role.ADMIN),
+  async (req: Request, res: Response): Promise<void> => {
+    const user = req.user as { clubId: string }
+    const { confirmed } = req.body as { confirmed?: boolean }
+    try {
+      const service = new ArchitectureService(user.clubId)
+      const result = await service.activateDraft(confirmed ?? false)
+      if (!result.success) {
+        res.status(409).json({
+          warning: result.warning,
+          affectedFiles: result.affectedFiles,
+          requiresConfirmation: true,
+        })
+        return
+      }
+      res.json({ message: 'Architecture activated successfully' })
+    } catch (err) {
+      res.status(500).json({
+        error: {
+          code: 'ACTIVATION_FAILED',
+          message: err instanceof Error ? err.message : 'Failed to activate',
+        },
+      })
+    }
+  }
+)
+
+// GET /api/v1/architecture/current — get active architecture (7.7)
+architectureRouter.get(
+  '/current',
+  requireAuth,
+  async (req: Request, res: Response): Promise<void> => {
+    const user = req.user as { clubId: string }
+    try {
+      const service = new ArchitectureService(user.clubId)
+      const tree = await service.getCurrentArchitecture()
+      if (!tree) {
+        res.status(404).json({ error: { code: 'NO_ARCHITECTURE', message: 'No active architecture found' } })
+        return
+      }
+      res.json({ tree })
+    } catch {
+      res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Failed to get architecture' } })
+    }
+  }
+)
+
+// GET /api/v1/architecture/versions — version history (7.8)
+architectureRouter.get(
+  '/versions',
+  requireRole(Role.ADMIN),
+  async (req: Request, res: Response): Promise<void> => {
+    const user = req.user as { clubId: string }
+    try {
+      const service = new ArchitectureService(user.clubId)
+      const versions = await service.getVersionHistory()
+      res.json({ versions })
+    } catch {
+      res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Failed to get versions' } })
+    }
+  }
+)
+
+// POST /api/v1/architecture/rollback/:versionId — rollback (7.10)
+architectureRouter.post(
+  '/rollback/:versionId',
+  requireRole(Role.ADMIN),
+  async (req: Request, res: Response): Promise<void> => {
+    const user = req.user as { clubId: string }
+    const { versionId } = req.params
+    try {
+      const service = new ArchitectureService(user.clubId)
+      await service.rollback(versionId)
+      res.json({ message: 'Rollback successful' })
+    } catch (err) {
+      res.status(500).json({
+        error: {
+          code: 'ROLLBACK_FAILED',
+          message: err instanceof Error ? err.message : 'Rollback failed',
+        },
+      })
+    }
+  }
+)
+
+// POST /api/v1/architecture/migrate — start migration (7.12)
+architectureRouter.post(
+  '/migrate',
+  requireRole(Role.ADMIN),
+  (req: Request, res: Response): void => {
+    const user = req.user as { clubId: string }
+    const { mode } = req.body as { mode: 'move' | 'copy' }
+    if (!mode || !['move', 'copy'].includes(mode)) {
+      res.status(400).json({ error: { code: 'INVALID_MODE', message: 'mode must be "move" or "copy"' } })
+      return
+    }
+    const service = new ArchitectureService(user.clubId)
+    const jobId = service.startMigration(mode)
+    res.status(202).json({ jobId, status: 'pending' })
+  }
+)
+
+// GET /api/v1/architecture/migrate/:jobId — migration status (7.13)
+architectureRouter.get(
+  '/migrate/:jobId',
+  requireRole(Role.ADMIN),
+  (req: Request, res: Response): void => {
+    const user = req.user as { clubId: string }
+    const { jobId } = req.params
+    const service = new ArchitectureService(user.clubId)
+    const job = service.getMigrationJob(jobId)
+    if (!job) {
+      res.status(404).json({ error: { code: 'JOB_NOT_FOUND', message: 'Migration job not found' } })
+      return
+    }
+    res.json(job)
   }
 )
