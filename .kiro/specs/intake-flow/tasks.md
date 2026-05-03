@@ -91,7 +91,7 @@ git pull
 - [x] 7.6 Create `POST /api/v1/architecture/activate` route (Admin only): trigger activation, warn if deleting categories with files (Req 11 AC6), require confirmation
 - [x] 7.7 Create `GET /api/v1/architecture/current` route (any authenticated user): return the active architecture tree
 - [x] 7.8 Create `GET /api/v1/architecture/versions` route (Admin only): return last 10 architecture versions
-- [ ] 7.9 Implement rollback in `ArchitectureService`: restore a previous version's tree snapshot, apply changes to Drive, update Metadata Store
+- [x] 7.9 Implement rollback in `ArchitectureService`: restore a previous version's tree snapshot, apply changes to Drive, update Metadata Store
 - [ ] 7.10 Create `POST /api/v1/architecture/rollback/:versionId` route (Admin only): trigger rollback
 - [ ] 7.11 Implement file migration: Admin chooses move or copy, AI determines target category per file using Gemini 1.5 Flash, files with confidence < 50 go to "Unsorted", call Drive API `files.update` (move) or `files.copy` (copy), stream progress via SSE
 - [ ] 7.12 Create `POST /api/v1/architecture/migrate` route (Admin only): start migration job, return job ID
