@@ -65,7 +65,7 @@ git pull
 ## Task 5: Structure Analysis (Req 3)
 
 - [x] 5.1 Create `server/src/services/structureAnalyzer.ts` with a `StructureAnalyzer` class
-- [ ] 5.2 Implement Drive traversal: use `drive.files.list` with pagination and parallel batch requests (batch size 100), collect folder hierarchy, file names, types, sizes, Drive File IDs, last modified dates
+- [x] 5.2 Implement Drive traversal: use `drive.files.list` with pagination and parallel batch requests (batch size 100), collect folder hierarchy, file names, types, sizes, Drive File IDs, last modified dates
 - [ ] 5.3 Build in-memory tree from flat file list using `parents` field; handle permission errors (403/404) by skipping and logging inaccessible paths
 - [ ] 5.4 Create `POST /api/v1/structure/analyze` route (Admin only): start traversal as an async job, return job ID
 - [ ] 5.5 Create `GET /api/v1/structure/analyze/:jobId` route (Admin only): return job status (pending/running/complete/failed) and result
