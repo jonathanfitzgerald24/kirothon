@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Auto-pull Before Task",
+  "description": "Automatically pulls the latest changes from the remote before starting a new spec task, keeping both computers in sync",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "git pull --rebase"
+  }
+}
