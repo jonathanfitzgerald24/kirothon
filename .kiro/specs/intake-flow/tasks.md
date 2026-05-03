@@ -150,7 +150,7 @@ git pull
 - [x] 11.5 Create invitation acceptance handler: validate token not expired and not used, show registration form, create user with assigned role, mark invitation as used
 - [x] 11.6 Implement last admin protection: before any role change or user removal, check `COUNT(*) FROM users WHERE clubId = ? AND role = 'ADMIN'`, reject if count would drop to 0
 - [x] 11.7 Create `PUT /api/v1/users/:userId/role` route (Admin only): change user's role (cannot change own role), enforce last admin protection
-- [ ] 11.8 Create `DELETE /api/v1/users/:userId` route (Admin only): remove user, revoke their session, enforce last admin protection
+- [x] 11.8 Create `DELETE /api/v1/users/:userId` route (Admin only): remove user, revoke their session, enforce last admin protection
 - [ ] 11.9 Create `PUT /api/v1/categories/:categoryId/minimum-role` route (Admin only): set minimum role for a category
 - [ ] 11.10 Create `POST /api/v1/categories/:categoryId/access` route (Admin only): grant individual access to a specific user
 - [ ] 11.11 Create `DELETE /api/v1/categories/:categoryId/access/:userId` route (Admin only): revoke individual access, immediately effective
