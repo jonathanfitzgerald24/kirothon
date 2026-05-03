@@ -191,7 +191,7 @@ git pull
 ## Task 14: Audit Logging (Req 14)
 
 - [x] 14.1 Create `server/src/services/auditService.ts` with an `AuditService` class and `logAction(clubId, userId, action, resourceType, resourceId, details)` method
-- [ ] 14.2 Create `server/src/middleware/auditLog.ts`: reusable middleware/helper that services call after significant actions (login, invite, role change, file upload, file placement, category CRUD, architecture activation, rollback)
+- [x] 14.2 Create `server/src/middleware/auditLog.ts`: reusable middleware/helper that services call after significant actions (login, invite, role change, file upload, file placement, category CRUD, architecture activation, rollback)
 - [ ] 14.3 Create `GET /api/v1/audit-logs` route (Admin only): accept filters `action`, `userId`, `from`, `to`, `page`; return paginated results within 3 seconds
 - [ ] 14.4 Create `server/src/jobs/auditCleanup.ts`: scheduled job (weekly) to delete audit log entries older than 12 months
 - [ ] 14.5 Write property-based test for P10 (Audit Log Completeness): generate sequences of significant actions, verify a matching AuditLog record exists for each
