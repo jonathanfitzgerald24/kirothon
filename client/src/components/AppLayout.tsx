@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { Search, FolderTree as FolderTreeIcon, Star, Zap, Upload, Folder } from 'lucide-react';
+import { Search, FolderTree as FolderTreeIcon, Star, Zap, Upload, Folder, Globe } from 'lucide-react';
 import { UserMenu } from './UserMenu';
 import { DemoBanner } from './DemoBanner';
 import { NotificationBell } from './notifications/NotificationBell';
@@ -42,8 +42,9 @@ export const AppLayout = () => {
       {/* Top bar */}
       <header className="flex h-14 shrink-0 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
         <div className="flex items-center gap-3">
-          <Link to="/" className="text-lg font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400">
-            FileAtlas
+          <Link to="/" className="flex items-center gap-2 text-lg font-semibold hover:opacity-80">
+            <Globe className="h-6 w-6 text-emerald-500" />
+            <span className="bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-500">FileAtlas</span>
           </Link>
         </div>
 
