@@ -25,7 +25,7 @@ git pull
 - [x] 2.10 Define `Favorite` model: id, userId (FK), fileId (FK with cascade delete), createdAt; unique constraint on (userId, fileId)
 - [x] 2.11 Define `QuickAccessFile` model: id, clubId, fileId (unique, FK with cascade delete), sortOrder, createdAt
 - [x] 2.12 Define `AuditLog` model: id, clubId (FK), userId (FK nullable), action, resourceType, resourceId, details (Json), createdAt; indexes on (clubId, createdAt), (clubId, action), (clubId, userId)
-- [ ] 2.13 Define `Invitation` model: id, clubId (FK), email, role, token (unique), expiresAt, usedAt, createdAt
+- [x] 2.13 Define `Invitation` model: id, clubId (FK), email, role, token (unique), expiresAt, usedAt, createdAt
 - [ ] 2.14 Define `Notification` model: id, clubId (FK), userId (FK), type, title, body, resourceId, isRead, isDismissed, createdAt; index on (userId, isRead, createdAt)
 - [ ] 2.15 Define `FileRequest` model: id, clubId (FK), requesterId (FK), description, fulfilledFileId, fulfilledAt, createdAt
 - [ ] 2.16 Define `StructuralDrift` model: id, clubId, changeType, drivePath, driveId, resolved, resolution, createdAt
