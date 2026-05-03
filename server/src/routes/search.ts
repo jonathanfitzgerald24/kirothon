@@ -14,7 +14,7 @@ searchRouter.get('/', requireAuth, async (req, res) => {
       return
     }
 
-    const result = await searchService.search(req.user!.clubId, req.user!.role, req.user!.id, {
+    const result = await searchService.search((req.user as any).clubId, (req.user as any).role, (req.user as any).id, {
       q,
       type,
       folder,
@@ -40,7 +40,7 @@ searchRouter.get('/semantic', requireAuth, async (req, res) => {
       return
     }
 
-    const result = await searchService.semanticSearch(req.user!.clubId, req.user!.role, req.user!.id, q)
+    const result = await searchService.semanticSearch((req.user as any).clubId, (req.user as any).role, (req.user as any).id, q)
     res.json(result)
   } catch (err) {
     console.error('Semantic search error:', err)

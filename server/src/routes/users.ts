@@ -8,7 +8,7 @@ export const usersRouter = Router()
 // GET /api/v1/users — Admin only
 usersRouter.get('/', requireRole(Role.ADMIN), async (req, res) => {
   try {
-    const users = await userService.listUsers(req.user!.clubId)
+    const users = await userService.listUsers((req.user as any).clubId)
     res.json(users)
   } catch (err) {
     console.error('List users error:', err)
@@ -24,7 +24,7 @@ usersRouter.post('/invite', requireRole(Role.ADMIN), async (req, res) => {
       res.status(400).json({ error: { code: 'VALIDATION', message: 'Email and role are required' } })
       return
     }
-    const result = await userService.createInvitation(req.user!.clubId, email, role, req.user!.id)
+    const result = await userService.createInvitation((req.user as any).clubId, email, role, (req.user as any).id)
     res.status(201).json(result)
   } catch (err) {
     console.error('Invite error:', err)
@@ -36,7 +36,7 @@ usersRouter.post('/invite', requireRole(Role.ADMIN), async (req, res) => {
 usersRouter.put('/:userId/role', requireRole(Role.ADMIN), async (req, res) => {
   try {
     const { role } = req.body as { role: Role }
-    const user = await userService.changeRole(req.user!.clubId, req.params.userId, role, req.user!.id)
+    const user = await userService.changeRole((req.user as any).clubId, req.params.userId, role, (req.user as any).id)
     res.json(user)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Failed to change role'
@@ -48,7 +48,7 @@ usersRouter.put('/:userId/role', requireRole(Role.ADMIN), async (req, res) => {
 // DELETE /api/v1/users/:userId — Admin only
 usersRouter.delete('/:userId', requireRole(Role.ADMIN), async (req, res) => {
   try {
-    await userService.removeUser(req.user!.clubId, req.params.userId, req.user!.id)
+    await userService.removeUser((req.user as any).clubId, req.params.userId, (req.user as any).id)
     res.status(204).send()
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Failed to remove user'
@@ -61,7 +61,7 @@ usersRouter.delete('/:userId', requireRole(Role.ADMIN), async (req, res) => {
 usersRouter.put('/categories/:categoryId/minimum-role', requireRole(Role.ADMIN), async (req, res) => {
   try {
     const { minimumRole } = req.body as { minimumRole: Role }
-    const category = await userService.setCategoryMinimumRole(req.user!.clubId, req.params.categoryId, minimumRole)
+    const category = await userService.setCategoryMinimumRole((req.user as any).clubId, req.params.categoryId, minimumRole)
     res.json(category)
   } catch (err) {
     res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to update category role' } })
@@ -93,7 +93,7 @@ usersRouter.delete('/categories/:categoryId/access/:userId', requireRole(Role.AD
 usersRouter.post('/access-requests', requireAuth, async (req, res) => {
   try {
     const { categoryId } = req.body as { categoryId: string }
-    const request = await userService.submitAccessRequest(req.user!.id, categoryId)
+    const request = await userService.submitAccessRequest((req.user as any).id, categoryId)
     res.status(201).json(request)
   } catch (err) {
     res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to submit access request' } })
@@ -104,7 +104,7 @@ usersRouter.post('/access-requests', requireAuth, async (req, res) => {
 usersRouter.put('/access-requests/:requestId', requireRole(Role.ADMIN), async (req, res) => {
   try {
     const { status } = req.body as { status: 'APPROVED' | 'DENIED' }
-    const result = await userService.resolveAccessRequest(req.params.requestId, status, req.user!.id)
+    const result = await userService.resolveAccessRequest(req.params.requestId, status, (req.user as any).id)
     res.json(result)
   } catch (err) {
     res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to resolve access request' } })

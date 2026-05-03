@@ -9,7 +9,7 @@ export const quickAccessRouter = Router()
 quickAccessRouter.get('/', requireAuth, async (req, res) => {
   try {
     const items = await prisma.quickAccessFile.findMany({
-      where: { clubId: req.user!.clubId },
+      where: { clubId: (req.user as any).clubId },
       include: {
         file: {
           include: { category: { select: { id: true, name: true } } },
@@ -26,7 +26,7 @@ quickAccessRouter.get('/', requireAuth, async (req, res) => {
 // POST /api/v1/quick-access/:fileId — Admin only, max 10
 quickAccessRouter.post('/:fileId', requireRole(Role.ADMIN), async (req, res) => {
   try {
-    const count = await prisma.quickAccessFile.count({ where: { clubId: req.user!.clubId } })
+    const count = await prisma.quickAccessFile.count({ where: { clubId: (req.user as any).clubId } })
     if (count >= 10) {
       res.status(400).json({ error: { code: 'LIMIT_EXCEEDED', message: 'Quick Access is limited to 10 files' } })
       return
@@ -34,7 +34,7 @@ quickAccessRouter.post('/:fileId', requireRole(Role.ADMIN), async (req, res) => 
 
     const item = await prisma.quickAccessFile.create({
       data: {
-        clubId: req.user!.clubId,
+        clubId: (req.user as any).clubId,
         fileId: req.params.fileId,
         sortOrder: count,
       },
@@ -49,7 +49,7 @@ quickAccessRouter.post('/:fileId', requireRole(Role.ADMIN), async (req, res) => 
 quickAccessRouter.delete('/:fileId', requireRole(Role.ADMIN), async (req, res) => {
   try {
     await prisma.quickAccessFile.deleteMany({
-      where: { clubId: req.user!.clubId, fileId: req.params.fileId },
+      where: { clubId: (req.user as any).clubId, fileId: req.params.fileId },
     })
     res.status(204).send()
   } catch (err) {

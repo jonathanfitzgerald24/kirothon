@@ -5,7 +5,7 @@ import { Pool } from 'pg'
 const PgSession = connectPgSimple(session)
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL?.replace(/\?schema=\w+/, ''),
 })
 
 export const sessionMiddleware = session({

@@ -9,7 +9,7 @@ export const fileRequestsRouter = Router()
 fileRequestsRouter.get('/', requireRole(Role.MOD), async (req, res) => {
   try {
     const requests = await prisma.fileRequest.findMany({
-      where: { clubId: req.user!.clubId, fulfilledAt: null },
+      where: { clubId: (req.user as any).clubId, fulfilledAt: null },
       include: { requester: { select: { id: true, displayName: true } } },
       orderBy: { createdAt: 'desc' },
     })
@@ -30,8 +30,8 @@ fileRequestsRouter.post('/', requireAuth, async (req, res) => {
 
     const request = await prisma.fileRequest.create({
       data: {
-        clubId: req.user!.clubId,
-        requesterId: req.user!.id,
+        clubId: (req.user as any).clubId,
+        requesterId: (req.user as any).id,
         description,
       },
     })

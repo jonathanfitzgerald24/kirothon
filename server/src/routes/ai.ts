@@ -46,7 +46,7 @@ aiRouter.put('/tags/:fileId', requireRole(Role.MOD), async (req, res) => {
 aiRouter.post('/smart-name', requireRole(Role.MOD), async (req, res) => {
   try {
     const { name, clubId } = req.body as { name: string; clubId?: string }
-    const cId = clubId ?? req.user!.clubId
+    const cId = clubId ?? (req.user as any).clubId
 
     const existingCategories = await prisma.category.findMany({
       where: { clubId: cId },
@@ -80,12 +80,12 @@ Return only the suggested name as plain text, nothing else.`
 aiRouter.get('/reorganize', requireRole(Role.ADMIN), async (req, res) => {
   try {
     const categories = await prisma.category.findMany({
-      where: { clubId: req.user!.clubId },
+      where: { clubId: (req.user as any).clubId },
       include: { files: { select: { id: true, name: true, mimeType: true, placementStatus: true } } },
     })
 
     const unsortedFiles = await prisma.fileMeta.findMany({
-      where: { clubId: req.user!.clubId, placementStatus: 'UNSORTED' },
+      where: { clubId: (req.user as any).clubId, placementStatus: 'UNSORTED' },
       select: { id: true, name: true, mimeType: true },
     })
 

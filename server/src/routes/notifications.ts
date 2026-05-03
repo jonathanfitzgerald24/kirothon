@@ -8,7 +8,7 @@ export const notificationsRouter = Router()
 // GET /api/v1/notifications
 notificationsRouter.get('/', requireAuth, async (req, res) => {
   try {
-    const notifications = await notificationService.getForUser(req.user!.id)
+    const notifications = await notificationService.getForUser((req.user as any).id)
     res.json(notifications)
   } catch (err) {
     res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to fetch notifications' } })
@@ -23,13 +23,13 @@ notificationsRouter.get('/stream', requireAuth, (req, res) => {
     Connection: 'keep-alive',
   })
   res.write('data: {"connected":true}\n\n')
-  notificationService.addConnection(req.user!.id, res)
+  notificationService.addConnection((req.user as any).id, res)
 })
 
 // PUT /api/v1/notifications/:id/read
 notificationsRouter.put('/:id/read', requireAuth, async (req, res) => {
   try {
-    await notificationService.markRead(req.params.id, req.user!.id)
+    await notificationService.markRead(req.params.id, (req.user as any).id)
     res.status(204).send()
   } catch (err) {
     res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to mark as read' } })
@@ -39,7 +39,7 @@ notificationsRouter.put('/:id/read', requireAuth, async (req, res) => {
 // DELETE /api/v1/notifications/:id
 notificationsRouter.delete('/:id', requireAuth, async (req, res) => {
   try {
-    await notificationService.dismiss(req.params.id, req.user!.id)
+    await notificationService.dismiss(req.params.id, (req.user as any).id)
     res.status(204).send()
   } catch (err) {
     res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to dismiss notification' } })
@@ -53,7 +53,7 @@ export const activityRouter = Router()
 activityRouter.get('/feed', requireAuth, async (req, res) => {
   try {
     const entries = await prisma.auditLog.findMany({
-      where: { clubId: req.user!.clubId },
+      where: { clubId: (req.user as any).clubId },
       include: { user: { select: { displayName: true } } },
       orderBy: { createdAt: 'desc' },
       take: 20,

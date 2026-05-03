@@ -28,6 +28,6 @@ demoRouter.post('/start', async (req, res) => {
 
 // GET /api/v1/demo/status
 demoRouter.get('/status', (req, res) => {
-  const user = req.user as Express.User | undefined
+  const user = req.user as any
   res.json({ demoMode: user?.club?.demoMode ?? false })
 })

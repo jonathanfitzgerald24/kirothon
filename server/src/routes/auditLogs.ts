@@ -8,7 +8,7 @@ export const auditLogsRouter = Router()
 // GET /api/v1/audit-logs — Admin only, filterable, paginated
 auditLogsRouter.get('/', requireRole(Role.ADMIN), async (req, res) => {
   try {
-    const user = req.user!
+    const user = req.user as { clubId: string }
     const { action, userId, from, to, page } = req.query as Record<string, string | undefined>
 
     const result = await auditService.getLogs(user.clubId, {

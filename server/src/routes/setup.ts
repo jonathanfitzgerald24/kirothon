@@ -15,7 +15,7 @@ const STEPS = [
 // GET /api/v1/setup/status
 setupRouter.get('/status', requireRole(Role.ADMIN), async (req, res) => {
   try {
-    const club = await prisma.club.findUnique({ where: { id: req.user!.clubId } })
+    const club = await prisma.club.findUnique({ where: { id: (req.user as any).clubId } })
     if (!club) {
       res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Club not found' } })
       return
@@ -38,7 +38,7 @@ setupRouter.put('/club-type', requireRole(Role.ADMIN), async (req, res) => {
   try {
     const { clubType } = req.body as { clubType: string }
     await prisma.club.update({
-      where: { id: req.user!.clubId },
+      where: { id: (req.user as any).clubId },
       data: { clubType },
     })
     res.status(204).send()

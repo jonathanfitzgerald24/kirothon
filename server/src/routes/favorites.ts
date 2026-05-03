@@ -8,7 +8,7 @@ export const favoritesRouter = Router()
 favoritesRouter.get('/', requireAuth, async (req, res) => {
   try {
     const favorites = await prisma.favorite.findMany({
-      where: { userId: req.user!.id },
+      where: { userId: (req.user as any).id },
       include: {
         file: {
           include: { category: { select: { id: true, name: true, minimumRole: true } } },
@@ -18,9 +18,9 @@ favoritesRouter.get('/', requireAuth, async (req, res) => {
     })
 
     // Filter out files the user no longer has access to
-    const userRole = req.user!.role
+    const userRole = (req.user as any).role as keyof typeof roleLevel
     const accessGrants = await prisma.accessGrant.findMany({
-      where: { userId: req.user!.id },
+      where: { userId: (req.user as any).id },
       select: { categoryId: true },
     })
     const grantedIds = new Set(accessGrants.map((g) => g.categoryId))
@@ -44,7 +44,7 @@ favoritesRouter.get('/', requireAuth, async (req, res) => {
 favoritesRouter.post('/:fileId', requireAuth, async (req, res) => {
   try {
     const favorite = await prisma.favorite.create({
-      data: { userId: req.user!.id, fileId: req.params.fileId },
+      data: { userId: (req.user as any).id, fileId: req.params.fileId },
     })
     res.status(201).json(favorite)
   } catch (err) {
@@ -56,7 +56,7 @@ favoritesRouter.post('/:fileId', requireAuth, async (req, res) => {
 favoritesRouter.delete('/:fileId', requireAuth, async (req, res) => {
   try {
     await prisma.favorite.deleteMany({
-      where: { userId: req.user!.id, fileId: req.params.fileId },
+      where: { userId: (req.user as any).id, fileId: req.params.fileId },
     })
     res.status(204).send()
   } catch (err) {
