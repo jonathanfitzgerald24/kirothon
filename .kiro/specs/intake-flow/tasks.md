@@ -261,7 +261,7 @@ git pull
 - [x] 19.7 Create `UploadFlow` component: file picker with drag-and-drop zone, optional upload note input (280 char limit), progress bar
 - [x] 19.8 Create `RoutingResultScreen` component: show auto-placement result, rename suggestion, duplicate warning, confirm/override actions
 - [x] 19.9 Create `BulkRoutingReview` component: three-tier grouping (auto-placed, needs selection, no match) for batch uploads
-- [ ] 19.10 Create `DragDropZone` component: overlay on folder views accepting dragged files, triggers direct upload to that folder
+- [x] 19.10 Create `DragDropZone` component: overlay on folder views accepting dragged files, triggers direct upload to that folder
 - [ ] 19.11 Create `SearchInput` component: search bar with 2-character minimum, semantic search toggle
 - [ ] 19.12 Create `SearchResults` component: results list with file name, folder path, type, lastModified, tags; filter chips (type, folder, date range, uploader, tag); client-side filter application
 - [ ] 19.13 Create `UploadHistoryPage` component: paginated list of user's uploads with file name, date, category, status
