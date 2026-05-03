@@ -1,15 +1,15 @@
 # Implementation Tasks — IntakeFlow
-
+git pull
 ## Task 1: Project Scaffolding and Configuration
 
-- [x] 1.1 Initialize monorepo structure with `client/` and `server/` directories, root `package.json` with workspaces
-- [x] 1.2 Set up `server/` with Express + TypeScript: `tsconfig.json`, `package.json`, install `express`, `typescript`, `ts-node`, `@types/express`, `@types/node`
-- [x] 1.3 Set up `client/` with Vite + React + TypeScript: `vite create`, install `react`, `react-dom`, `react-router-dom`, `typescript`
-- [x] 1.4 Install and configure Tailwind CSS + shadcn/ui in `client/`: `tailwind.config.ts`, `postcss.config.js`, global styles
-- [x] 1.5 Install and configure Prisma in `server/`: `prisma init`, set `DATABASE_URL` in `.env.example`, create initial empty `schema.prisma`
-- [x] 1.6 Create `docker-compose.yml` with PostgreSQL 16 service for local development
-- [x] 1.7 Install shared dev dependencies: `vitest`, `fast-check`, `@testing-library/react`, `eslint`, `prettier`
-- [x] 1.8 Create `.env.example` with all required environment variables: `DATABASE_URL`, `SESSION_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_AI_API_KEY`, `SENDGRID_API_KEY`, `ENCRYPTION_KEY`
+- [ ] 1.1 Initialize monorepo structure with `client/` and `server/` directories, root `package.json` with workspaces
+- [ ] 1.2 Set up `server/` with Express + TypeScript: `tsconfig.json`, `package.json`, install `express`, `typescript`, `ts-node`, `@types/express`, `@types/node`
+- [ ] 1.3 Set up `client/` with Vite + React + TypeScript: `vite create`, install `react`, `react-dom`, `react-router-dom`, `typescript`
+- [ ] 1.4 Install and configure Tailwind CSS + shadcn/ui in `client/`: `tailwind.config.ts`, `postcss.config.js`, global styles
+- [ ] 1.5 Install and configure Prisma in `server/`: `prisma init`, set `DATABASE_URL` in `.env.example`, create initial empty `schema.prisma`
+- [ ] 1.6 Create `docker-compose.yml` with PostgreSQL 16 service for local development
+- [ ] 1.7 Install shared dev dependencies: `vitest`, `fast-check`, `@testing-library/react`, `eslint`, `prettier`
+- [ ] 1.8 Create `.env.example` with all required environment variables: `DATABASE_URL`, `SESSION_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_AI_API_KEY`, `SENDGRID_API_KEY`, `ENCRYPTION_KEY`
 
 ## Task 2: Database Schema and Prisma Models
 
@@ -50,6 +50,7 @@
 - [ ] 3.12 Create `validate(schema)` middleware: validate request body/query/params against a zod schema, return 400 with structured error on failure
 - [ ] 3.13 Configure CSRF protection via `csurf` middleware for all state-changing routes
 - [ ] 3.14 Write property-based test for P6 (Session Expiry Enforcement): generate random session ages, verify sessions older than 24 hours are rejected
+
 
 ## Task 4: Google Drive Connection (Req 2)
 
@@ -96,6 +97,7 @@
 - [ ] 7.12 Create `POST /api/v1/architecture/migrate` route (Admin only): start migration job, return job ID
 - [ ] 7.13 Create `GET /api/v1/architecture/migrate/:jobId` route (Admin only): return migration progress and summary
 - [ ] 7.14 Write property-based test for P3 (Architecture Version Monotonicity): generate sequences of activations, verify version numbers are strictly increasing
+
 
 ## Task 8: File Portal — Browsing and Viewing (Req 7, 8, 24, 25, 26, 27)
 
@@ -158,6 +160,7 @@
 - [ ] 11.15 Write property-based test for P7 (Invitation Token Expiry): generate invitations with various ages, verify expired tokens are always rejected
 - [ ] 11.16 Write property-based test for P14 (Access Grant Symmetry): generate access grant/revoke sequences, verify access is immediately revoked after removal
 
+
 ## Task 12: Notifications and Real-Time (Req 45, 22)
 
 - [ ] 12.1 Create `server/src/services/notificationService.ts` with a `NotificationService` class
@@ -217,6 +220,7 @@
 - [ ] 16.7 Create `GET /api/v1/demo/status` route: check if current session is in demo mode
 - [ ] 16.8 Create `server/src/jobs/demoCleanup.ts`: scheduled job to clean up demo club data after 24 hours of inactivity
 - [ ] 16.9 Write property-based test for P11 (Demo Mode Isolation): generate sequences of Drive operations in demo mode, verify none reach the real Drive API
+
 
 ## Task 17: Favorites, Quick Access, and File Requests (Req 20, 23, 43)
 
@@ -279,6 +283,7 @@
 - [ ] 20.9 Create `NewBadge` component: "New" indicator on files/folders added/modified since user's last login, visible for up to 7 days, dismissed on view
 - [ ] 20.10 Create `GET /api/v1/portal/new-badges` route: return file/folder IDs with "New" badge status for the current user based on `lastLoginAt`
 - [ ] 20.11 Create `GET /api/v1/dashboard/admin` route (Admin only): return Club Activity Dashboard metrics (total files, uploads last 30 days, top uploaders, unresolved items)
+
 
 ## Task 21: Rate Limiting, Error Handling, and Security Hardening
 
