@@ -211,9 +211,9 @@ git pull
 
 ## Task 16: Setup Wizard, Demo Mode, and Club Type (Req 16, 17, 18)
 
-- [ ] 16.1 Create `GET /api/v1/setup/status` route (Admin only): return current setup step (0-4) and completion state per step
-- [ ] 16.2 Implement setup step progression: Connect Drive (0→1), Analyze Structure (1→2), Approve Architecture (2→3), Invite Team (3→4); enforce sequential unlocking
-- [ ] 16.3 Create `PUT /api/v1/setup/club-type` route (Admin only): set club type on Club record for AI context during architecture proposals
+- [x] 16.1 Create `GET /api/v1/setup/status` route (Admin only): return current setup step (0-4) and completion state per step
+- [x] 16.2 Implement setup step progression: Connect Drive (0→1), Analyze Structure (1→2), Approve Architecture (2→3), Invite Team (3→4); enforce sequential unlocking
+- [x] 16.3 Create `PUT /api/v1/setup/club-type` route (Admin only): set club type on Club record for AI context during architecture proposals
 - [ ] 16.4 Create `server/src/services/demoService.ts`: clone pre-seeded demo data into a temporary club with `demoMode = true`
 - [ ] 16.5 Create `server/src/middleware/demoGuard.ts`: intercept all `DriveConnector` calls when `club.demoMode = true`, return mock responses instead of calling real Drive API
 - [ ] 16.6 Create `POST /api/v1/demo/start` route (no auth required): enter demo mode, create sandboxed session with sample data
