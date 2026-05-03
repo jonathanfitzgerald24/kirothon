@@ -1,0 +1,116 @@
+import { Router } from 'express'
+import { Role } from '@prisma/client'
+import { requireAuth, requireRole } from '../middleware/auth'
+import { aiTagService } from '../services/aiTagService'
+import { prisma } from '../lib/prisma'
+import { GeminiClient } from '../services/geminiClient'
+
+export const aiRouter = Router()
+
+const gemini = new GeminiClient()
+
+// POST /api/v1/ai/tags/:fileId — regenerate auto-tags
+aiRouter.post('/tags/:fileId', requireRole(Role.MOD), async (req, res) => {
+  try {
+    const tags = await aiTagService.generateTags(req.params.fileId)
+    res.json({ tags })
+  } catch (err) {
+    res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to generate tags' } })
+  }
+})
+
+// PUT /api/v1/ai/tags/:fileId — manually add/remove tags
+aiRouter.put('/tags/:fileId', requireRole(Role.MOD), async (req, res) => {
+  try {
+    const { add, remove } = req.body as { add?: string[]; remove?: string[] }
+
+    if (add) {
+      for (const name of add) {
+        await aiTagService.addManualTag(req.params.fileId, name)
+      }
+    }
+    if (remove) {
+      for (const name of remove) {
+        await aiTagService.removeTag(req.params.fileId, name)
+      }
+    }
+
+    const tags = await prisma.tag.findMany({ where: { fileId: req.params.fileId } })
+    res.json({ tags })
+  } catch (err) {
+    res.status(500).json({ error: { code: 'INTERNAL', message: 'Failed to update tags' } })
+  }
+})
+
+// POST /api/v1/ai/smart-name — check a proposed category name
+aiRouter.post('/smart-name', requireRole(Role.MOD), async (req, res) => {
+  try {
+    const { name, clubId } = req.body as { name: string; clubId?: string }
+    const cId = clubId ?? req.user!.clubId
+
+    const existingCategories = await prisma.category.findMany({
+      where: { clubId: cId },
+      select: { name: true },
+    })
+
+    const existingNames = existingCategories.map((c) => c.name)
+
+    const prompt = `A user wants to create a folder named "${name}" in a file organization system.
+Existing folder names: ${JSON.stringify(existingNames)}
+
+If the proposed name is inconsistent with the existing naming conventions (e.g., different casing, abbreviation style, or format), suggest a normalized version.
+If the name is fine, return the same name.
+
+Return only the suggested name as plain text, nothing else.`
+
+    const suggestion = await gemini.generate(prompt, 'flash')
+    const cleaned = suggestion.trim().replace(/^["']|["']$/g, '')
+
+    res.json({
+      original: name,
+      suggestion: cleaned,
+      changed: cleaned.toLowerCase() !== name.toLowerCase(),
+    })
+  } catch (err) {
+    res.status(500).json({ error: { code: 'INTERNAL', message: 'Smart naming failed' } })
+  }
+})
+
+// GET /api/v1/ai/reorganize — trigger re-organization analysis
+aiRouter.get('/reorganize', requireRole(Role.ADMIN), async (req, res) => {
+  try {
+    const categories = await prisma.category.findMany({
+      where: { clubId: req.user!.clubId },
+      include: { files: { select: { id: true, name: true, mimeType: true, placementStatus: true } } },
+    })
+
+    const unsortedFiles = await prisma.fileMeta.findMany({
+      where: { clubId: req.user!.clubId, placementStatus: 'UNSORTED' },
+      select: { id: true, name: true, mimeType: true },
+    })
+
+    const prompt = `Analyze this folder structure and suggest reorganization improvements.
+Folders: ${JSON.stringify(categories.map((c) => ({ name: c.name, fileCount: c.files.length })))}
+Unsorted files: ${JSON.stringify(unsortedFiles.map((f) => ({ name: f.name, type: f.mimeType })))}
+
+Return a JSON object with:
+{
+  "suggestions": [
+    { "type": "move" | "merge" | "rename" | "create", "description": "...", "details": {} }
+  ]
+}`
+
+    const response = await gemini.generate(prompt, 'pro')
+    let suggestions = []
+    try {
+      const parsed = JSON.parse(response)
+      suggestions = parsed.suggestions ?? []
+    } catch {
+      suggestions = []
+    }
+
+    res.json({ suggestions })
+  } catch (err) {
+    res.status(500).json({ error: { code: 'INTERNAL', message: 'Reorganization analysis failed' } })
+  }
+})

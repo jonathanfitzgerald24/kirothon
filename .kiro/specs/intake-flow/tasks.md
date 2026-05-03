@@ -143,7 +143,7 @@ git pull
 
 ## Task 11: User and Role Management (Req 12, 13, 44)
 
-- [ ] 11.1 Create `server/src/services/userService.ts` with a `UserService` class
+- [x] 11.1 Create `server/src/services/userService.ts` with a `UserService` class
 - [ ] 11.2 Create `GET /api/v1/users` route (Admin only): list all users in the club with role, email, lastLoginAt
 - [ ] 11.3 Implement invitation flow: generate UUID token, create `Invitation` record with 72-hour expiry, send email via SendGrid/Nodemailer with link `{baseUrl}/invite/{token}`
 - [ ] 11.4 Create `POST /api/v1/users/invite` route (Admin only): validate email + role, create invitation, send email
