@@ -272,7 +272,7 @@ git pull
 
 ## Task 20: Frontend — Dashboard, Notifications, Settings, and Remaining Features
 
-- [ ] 20.1 Create `Dashboard` component: Activity Feed (last 20 actions with real-time SSE updates), setup wizard (if incomplete), Quick Access section
+- [x] 20.1 Create `Dashboard` component: Activity Feed (last 20 actions with real-time SSE updates), setup wizard (if incomplete), Quick Access section
 - [ ] 20.2 Create `ActivityFeed` component: display action type, user, affected resource, timestamp; real-time updates via SSE connection to `/activity/stream`
 - [ ] 20.3 Create `ClubActivityDashboard` component (Admin only): total files, uploads last 30 days, top 3 uploaders, unresolved items count; omit zero-value widgets
 - [ ] 20.4 Create `NotificationBell` component: bell icon with unread count badge

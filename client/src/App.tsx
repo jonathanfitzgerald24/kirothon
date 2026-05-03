@@ -18,6 +18,7 @@ import { AdminArchitecturePage } from '@/pages/AdminArchitecturePage';
 import { AdminUsersPage } from '@/pages/AdminUsersPage';
 import { AdminAuditPage } from '@/pages/AdminAuditPage';
 import { AdminDriveSyncPage } from '@/pages/AdminDriveSyncPage';
+import { SettingsPage } from '@/pages/SettingsPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,6 +61,7 @@ export const App = () => {
                   <Route path="/admin/users" element={<AdminUsersPage />} />
                   <Route path="/admin/audit" element={<AdminAuditPage />} />
                   <Route path="/admin/drive-sync" element={<AdminDriveSyncPage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
                 </Route>
               </Routes>
             </AuthProvider>
