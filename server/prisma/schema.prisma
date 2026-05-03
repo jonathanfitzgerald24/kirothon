@@ -9,3 +9,277 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  MOD
+  MEMBER
+}
+
+enum PlacementStatus {
+  PLACED
+  PENDING
+  FAILED
+  UNSORTED
+}
+
+// ─── Core Entities ───────────────────────────────────────────────────────────
+
+model Club {
+  id                   String    @id @default(uuid())
+  name                 String
+  clubType             String?   // greek_life | sports_team | academic_club | arts | professional | general
+  driveConnected       Boolean   @default(false)
+  driveAccessToken     String?   // encrypted AES-256-GCM
+  driveRefreshToken    String?   // encrypted AES-256-GCM
+  driveTokenExpiry     DateTime?
+  webhookChannelId     String?
+  webhookResourceId    String?
+  webhookExpiry        DateTime?
+  drivePageToken       String?   // for Changes API delta sync
+  setupStep            Int       @default(0) // 0-4 for Guided Setup Wizard
+  demoMode             Boolean   @default(false)
+  lastSyncAt           DateTime?
+  driftUnresolvedCount Int       @default(0)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  users                User[]
+  architectureVersions ArchitectureVersion[]
+  categories           Category[]
+  files                FileMeta[]
+  auditLogs            AuditLog[]
+  invitations          Invitation[]
+  notifications        Notification[]
+  fileRequests         FileRequest[]
+  quickAccessFiles     QuickAccessFile[]
+}
+
+model User {
+  id                 String    @id @default(uuid())
+  email              String    @unique
+  passwordHash       String?   // null for Google OAuth-only users
+  googleId           String?   @unique
+  displayName        String
+  role               Role
+  clubId             String
+  club               Club      @relation(fields: [clubId], references: [id])
+  darkMode           Boolean   @default(false)
+  firstLoginComplete Boolean   @default(false)
+  lastLoginAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  uploadedFiles FileMeta[]    @relation("Uploader")
+  favorites     Favorite[]
+  accessGrants  AccessGrant[]
+  auditLogs     AuditLog[]
+  notifications Notification[]
+  fileRequests  FileRequest[]
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  data      Json
+  expiresAt DateTime // 24-hour idle timeout
+  createdAt DateTime @default(now())
+}
+
+// ─── Architecture and Folder Structure ───────────────────────────────────────
+
+model ArchitectureVersion {
+  id           String    @id @default(uuid())
+  clubId       String
+  club         Club      @relation(fields: [clubId], references: [id])
+  version      Int
+  treeSnapshot Json      // full folder tree at time of activation
+  isActive     Boolean   @default(false)
+  isDraft      Boolean   @default(false)
+  activatedAt  DateTime?
+  createdAt    DateTime  @default(now())
+}
+
+model Category {
+  id            String    @id @default(uuid())
+  clubId        String
+  club          Club      @relation(fields: [clubId], references: [id])
+  name          String
+  parentId      String?
+  parent        Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children      Category[] @relation("CategoryTree")
+  driveFolderId String?
+  description   String?   // AI-generated folder description
+  minimumRole   Role      @default(MEMBER)
+  sortOrder     Int       @default(0)
+  lastUpdatedAt DateTime  @default(now()) // most recent file change in subtree
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  files        FileMeta[]
+  accessGrants AccessGrant[]
+
+  @@index([clubId, parentId])
+}
+
+model AccessGrant {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, categoryId])
+}
+
+// ─── File Metadata ────────────────────────────────────────────────────────────
+
+model FileMeta {
+  id                 String          @id @default(uuid())
+  clubId             String
+  club               Club            @relation(fields: [clubId], references: [id])
+  categoryId         String?
+  category           Category?       @relation(fields: [categoryId], references: [id])
+  driveFileId        String
+  name               String
+  mimeType           String
+  sizeBytes          BigInt
+  uploaderId         String?
+  uploader           User?           @relation("Uploader", fields: [uploaderId], references: [id])
+  placementStatus    PlacementStatus @default(PLACED)
+  confidenceScore    Int?
+  routingExplanation String?         // "Why here?" text
+  aiSummary          String?
+  uploadNote         String?         @db.VarChar(280)
+  isUnmanaged        Boolean         @default(false)
+  driveLastModified  DateTime?
+  uploadedAt         DateTime        @default(now())
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  tags        Tag[]
+  favorites   Favorite[]
+  quickAccess QuickAccessFile?
+
+  @@index([clubId, categoryId])
+  @@index([clubId, name])
+  @@index([clubId, uploadedAt])
+  @@index([clubId, uploaderId])
+}
+
+model Tag {
+  id        String   @id @default(uuid())
+  name      String
+  fileId    String
+  file      FileMeta @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  autoGen   Boolean  @default(true) // true = AI-generated, false = manual
+  createdAt DateTime @default(now())
+
+  @@unique([fileId, name])
+  @@index([name])
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  fileId    String
+  file      FileMeta @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, fileId])
+}
+
+model QuickAccessFile {
+  id        String   @id @default(uuid())
+  clubId    String
+  club      Club     @relation(fields: [clubId], references: [id])
+  fileId    String   @unique
+  file      FileMeta @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+// ─── Supporting Entities ─────────────────────────────────────────────────────
+
+model AuditLog {
+  id           String   @id @default(uuid())
+  clubId       String
+  club         Club     @relation(fields: [clubId], references: [id])
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id])
+  action       String   // LOGIN, INVITE, ROLE_CHANGE, FILE_UPLOAD, FILE_PLACEMENT, CATEGORY_CREATE, CATEGORY_RENAME, CATEGORY_DELETE, ARCHITECTURE_ACTIVATE, ROLLBACK
+  resourceType String?
+  resourceId   String?
+  details      Json?
+  createdAt    DateTime @default(now())
+
+  @@index([clubId, createdAt])
+  @@index([clubId, action])
+  @@index([clubId, userId])
+}
+
+model Invitation {
+  id        String    @id @default(uuid())
+  clubId    String
+  club      Club      @relation(fields: [clubId], references: [id])
+  email     String
+  role      Role
+  token     String    @unique
+  expiresAt DateTime  // 72 hours from creation
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Notification {
+  id          String   @id @default(uuid())
+  clubId      String
+  club        Club     @relation(fields: [clubId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  type        String   // FILE_REQUEST, CATEGORY_APPROVAL, DRIFT_ALERT, ACCESS_REQUEST, FILE_ADDED, REQUEST_FULFILLED, ACCESS_DENIED
+  title       String
+  body        String?
+  resourceId  String?
+  isRead      Boolean  @default(false)
+  isDismissed Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([userId, isRead, createdAt])
+}
+
+model FileRequest {
+  id              String    @id @default(uuid())
+  clubId          String
+  club            Club      @relation(fields: [clubId], references: [id])
+  requesterId     String
+  requester       User      @relation(fields: [requesterId], references: [id])
+  description     String
+  fulfilledFileId String?
+  fulfilledAt     DateTime?
+  createdAt       DateTime  @default(now())
+}
+
+model StructuralDrift {
+  id         String   @id @default(uuid())
+  clubId     String
+  changeType String   // FOLDER_CREATED, FOLDER_DELETED, FILE_ADDED, FILE_DELETED, FILE_MOVED, FILE_RENAMED
+  drivePath  String
+  driveId    String?
+  resolved   Boolean  @default(false)
+  resolution String?  // ACCEPTED, IGNORED
+  createdAt  DateTime @default(now())
+}
+
+model AccessRequest {
+  id         String    @id @default(uuid())
+  userId     String
+  categoryId String
+  status     String    @default("PENDING") // PENDING, APPROVED, DENIED
+  resolvedBy String?
+  resolvedAt DateTime?
+  createdAt  DateTime  @default(now())
+}

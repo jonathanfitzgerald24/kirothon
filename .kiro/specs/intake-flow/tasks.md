@@ -13,53 +13,53 @@ git pull
 
 ## Task 2: Database Schema and Prisma Models
 
-- [ ] 2.1 Define core enums in `schema.prisma`: `Role` (ADMIN, MOD, MEMBER), `PlacementStatus` (PLACED, PENDING, FAILED, UNSORTED)
-- [ ] 2.2 Define `Club` model with all fields: id, name, clubType, Drive connection fields (driveConnected, encrypted tokens, webhook fields, pageToken), setupStep, demoMode, lastSyncAt, driftUnresolvedCount, timestamps
-- [ ] 2.3 Define `User` model: id, email, passwordHash (nullable for OAuth-only), googleId, displayName, role, clubId (FK to Club), darkMode, firstLoginComplete, lastLoginAt, timestamps
-- [ ] 2.4 Define `Session` model: id, userId, data (Json), expiresAt, createdAt
-- [ ] 2.5 Define `ArchitectureVersion` model: id, clubId (FK), version, treeSnapshot (Json), isActive, isDraft, activatedAt, createdAt
-- [ ] 2.6 Define `Category` model: id, clubId (FK), name, parentId (self-referential FK), driveFolderId, description, minimumRole (default MEMBER), sortOrder, lastUpdatedAt, timestamps
-- [ ] 2.7 Define `AccessGrant` model: id, userId (FK), categoryId (FK), createdAt; unique constraint on (userId, categoryId)
-- [ ] 2.8 Define `FileMeta` model: id, clubId (FK), categoryId (FK nullable), driveFileId, name, mimeType, sizeBytes (BigInt), uploaderId (FK nullable), placementStatus, confidenceScore, routingExplanation, aiSummary, uploadNote (VarChar 280), isUnmanaged, driveLastModified, uploadedAt, timestamps
-- [ ] 2.9 Define `Tag` model: id, name, fileId (FK with cascade delete), autoGen boolean; unique constraint on (fileId, name)
-- [ ] 2.10 Define `Favorite` model: id, userId (FK), fileId (FK with cascade delete), createdAt; unique constraint on (userId, fileId)
-- [ ] 2.11 Define `QuickAccessFile` model: id, clubId, fileId (unique, FK with cascade delete), sortOrder, createdAt
-- [ ] 2.12 Define `AuditLog` model: id, clubId (FK), userId (FK nullable), action, resourceType, resourceId, details (Json), createdAt; indexes on (clubId, createdAt), (clubId, action), (clubId, userId)
-- [ ] 2.13 Define `Invitation` model: id, clubId (FK), email, role, token (unique), expiresAt, usedAt, createdAt
-- [ ] 2.14 Define `Notification` model: id, clubId (FK), userId (FK), type, title, body, resourceId, isRead, isDismissed, createdAt; index on (userId, isRead, createdAt)
-- [ ] 2.15 Define `FileRequest` model: id, clubId (FK), requesterId (FK), description, fulfilledFileId, fulfilledAt, createdAt
-- [ ] 2.16 Define `StructuralDrift` model: id, clubId, changeType, drivePath, driveId, resolved, resolution, createdAt
-- [ ] 2.17 Define `AccessRequest` model: id, userId, categoryId, status (default PENDING), resolvedBy, resolvedAt, createdAt
-- [ ] 2.18 Add database indexes on `FileMeta`: (clubId, categoryId), (clubId, name), (clubId, uploadedAt), (clubId, uploaderId); on `Category`: (clubId, parentId); on `Tag`: (name)
-- [ ] 2.19 Run `prisma migrate dev` to generate and apply the initial migration
-- [ ] 2.20 Create `server/src/prisma/seed.ts` with demo mode seed data: sample club, users, categories, files, tags
+- [x] 2.1 Define core enums in `schema.prisma`: `Role` (ADMIN, MOD, MEMBER), `PlacementStatus` (PLACED, PENDING, FAILED, UNSORTED)
+- [x] 2.2 Define `Club` model with all fields: id, name, clubType, Drive connection fields (driveConnected, encrypted tokens, webhook fields, pageToken), setupStep, demoMode, lastSyncAt, driftUnresolvedCount, timestamps
+- [x] 2.3 Define `User` model: id, email, passwordHash (nullable for OAuth-only), googleId, displayName, role, clubId (FK to Club), darkMode, firstLoginComplete, lastLoginAt, timestamps
+- [x] 2.4 Define `Session` model: id, userId, data (Json), expiresAt, createdAt
+- [x] 2.5 Define `ArchitectureVersion` model: id, clubId (FK), version, treeSnapshot (Json), isActive, isDraft, activatedAt, createdAt
+- [x] 2.6 Define `Category` model: id, clubId (FK), name, parentId (self-referential FK), driveFolderId, description, minimumRole (default MEMBER), sortOrder, lastUpdatedAt, timestamps
+- [x] 2.7 Define `AccessGrant` model: id, userId (FK), categoryId (FK), createdAt; unique constraint on (userId, categoryId)
+- [x] 2.8 Define `FileMeta` model: id, clubId (FK), categoryId (FK nullable), driveFileId, name, mimeType, sizeBytes (BigInt), uploaderId (FK nullable), placementStatus, confidenceScore, routingExplanation, aiSummary, uploadNote (VarChar 280), isUnmanaged, driveLastModified, uploadedAt, timestamps
+- [x] 2.9 Define `Tag` model: id, name, fileId (FK with cascade delete), autoGen boolean; unique constraint on (fileId, name)
+- [x] 2.10 Define `Favorite` model: id, userId (FK), fileId (FK with cascade delete), createdAt; unique constraint on (userId, fileId)
+- [x] 2.11 Define `QuickAccessFile` model: id, clubId, fileId (unique, FK with cascade delete), sortOrder, createdAt
+- [x] 2.12 Define `AuditLog` model: id, clubId (FK), userId (FK nullable), action, resourceType, resourceId, details (Json), createdAt; indexes on (clubId, createdAt), (clubId, action), (clubId, userId)
+- [x] 2.13 Define `Invitation` model: id, clubId (FK), email, role, token (unique), expiresAt, usedAt, createdAt
+- [x] 2.14 Define `Notification` model: id, clubId (FK), userId (FK), type, title, body, resourceId, isRead, isDismissed, createdAt; index on (userId, isRead, createdAt)
+- [x] 2.15 Define `FileRequest` model: id, clubId (FK), requesterId (FK), description, fulfilledFileId, fulfilledAt, createdAt
+- [x] 2.16 Define `StructuralDrift` model: id, clubId, changeType, drivePath, driveId, resolved, resolution, createdAt
+- [x] 2.17 Define `AccessRequest` model: id, userId, categoryId, status (default PENDING), resolvedBy, resolvedAt, createdAt
+- [x] 2.18 Add database indexes on `FileMeta`: (clubId, categoryId), (clubId, name), (clubId, uploadedAt), (clubId, uploaderId); on `Category`: (clubId, parentId); on `Tag`: (name)
+- [x] 2.19 Run `prisma migrate dev` to generate and apply the initial migration
+- [x] 2.20 Create `server/src/prisma/seed.ts` with demo mode seed data: sample club, users, categories, files, tags
 
 ## Task 3: Authentication and Session Management (Req 1, 19)
 
-- [ ] 3.1 Install auth dependencies: `passport`, `passport-local`, `passport-google-oauth20`, `bcrypt`, `express-session`, `connect-pg-simple`, `csurf`, `zod`
-- [ ] 3.2 Configure `express-session` with `connect-pg-simple` store, 24-hour `maxAge`, `httpOnly`, `secure`, `sameSite: lax` cookie settings
-- [ ] 3.3 Implement Passport local strategy: validate email/password against `User` table using bcrypt compare
-- [ ] 3.4 Implement Passport Google OAuth strategy: handle new user creation, existing account linking, and pending invitation matching (Req 19)
-- [ ] 3.5 Create `POST /api/v1/auth/register` route: validate input with zod (email, password complexity, club name), hash password with bcrypt (cost 12), create Club + User (Admin role), create session
-- [ ] 3.6 Create `POST /api/v1/auth/login` route: authenticate via Passport local, create session, update `lastLoginAt`
-- [ ] 3.7 Create `GET /api/v1/auth/google` and `GET /api/v1/auth/google/callback` routes: initiate and handle Google OAuth flow
-- [ ] 3.8 Create `POST /api/v1/auth/logout` route: destroy session
-- [ ] 3.9 Create `GET /api/v1/auth/me` route: return current user profile, role, club info from session
-- [ ] 3.10 Create `auth` middleware: validate session exists and is not expired, attach user to request
-- [ ] 3.11 Create `requireRole(minimumRole)` middleware: check `roleLevel(user.role) >= roleLevel(minimumRole)`, return 403 if insufficient
-- [ ] 3.12 Create `validate(schema)` middleware: validate request body/query/params against a zod schema, return 400 with structured error on failure
-- [ ] 3.13 Configure CSRF protection via `csurf` middleware for all state-changing routes
-- [ ] 3.14 Write property-based test for P6 (Session Expiry Enforcement): generate random session ages, verify sessions older than 24 hours are rejected
+- [x] 3.1 Install auth dependencies: `passport`, `passport-local`, `passport-google-oauth20`, `bcrypt`, `express-session`, `connect-pg-simple`, `csurf`, `zod`
+- [x] 3.2 Configure `express-session` with `connect-pg-simple` store, 24-hour `maxAge`, `httpOnly`, `secure`, `sameSite: lax` cookie settings
+- [x] 3.3 Implement Passport local strategy: validate email/password against `User` table using bcrypt compare
+- [x] 3.4 Implement Passport Google OAuth strategy: handle new user creation, existing account linking, and pending invitation matching (Req 19)
+- [x] 3.5 Create `POST /api/v1/auth/register` route: validate input with zod (email, password complexity, club name), hash password with bcrypt (cost 12), create Club + User (Admin role), create session
+- [x] 3.6 Create `POST /api/v1/auth/login` route: authenticate via Passport local, create session, update `lastLoginAt`
+- [x] 3.7 Create `GET /api/v1/auth/google` and `GET /api/v1/auth/google/callback` routes: initiate and handle Google OAuth flow
+- [x] 3.8 Create `POST /api/v1/auth/logout` route: destroy session
+- [x] 3.9 Create `GET /api/v1/auth/me` route: return current user profile, role, club info from session
+- [x] 3.10 Create `auth` middleware: validate session exists and is not expired, attach user to request
+- [x] 3.11 Create `requireRole(minimumRole)` middleware: check `roleLevel(user.role) >= roleLevel(minimumRole)`, return 403 if insufficient
+- [x] 3.12 Create `validate(schema)` middleware: validate request body/query/params against a zod schema, return 400 with structured error on failure
+- [x] 3.13 Configure CSRF protection via `csurf` middleware for all state-changing routes
+- [x] 3.14 Write property-based test for P6 (Session Expiry Enforcement): generate random session ages, verify sessions older than 24 hours are rejected
 
 
 ## Task 4: Google Drive Connection (Req 2)
 
-- [ ] 4.1 Install `googleapis` npm package and create `server/src/services/driveConnector.ts` with a `DriveConnector` class
-- [ ] 4.2 Implement AES-256-GCM encryption/decryption utility for storing OAuth tokens at rest, using `ENCRYPTION_KEY` from environment
-- [ ] 4.3 Create `GET /api/v1/drive/connect` route (Admin only): generate Google OAuth URL with `https://www.googleapis.com/auth/drive` scope, redirect to Google consent screen
-- [ ] 4.4 Create `GET /api/v1/drive/callback` route (Admin only): exchange auth code for access + refresh tokens, encrypt and store on Club record, set `driveConnected = true`
-- [ ] 4.5 Create `POST /api/v1/drive/disconnect` route (Admin only): revoke tokens via Google API, clear token fields on Club, set `driveConnected = false`
-- [ ] 4.6 Create `GET /api/v1/drive/status` route (Admin only): return connection status, `lastSyncAt`, `driftUnresolvedCount`
+- [x] 4.1 Install `googleapis` npm package and create `server/src/services/driveConnector.ts` with a `DriveConnector` class
+- [x] 4.2 Implement AES-256-GCM encryption/decryption utility for storing OAuth tokens at rest, using `ENCRYPTION_KEY` from environment
+- [x] 4.3 Create `GET /api/v1/drive/connect` route (Admin only): generate Google OAuth URL with `https://www.googleapis.com/auth/drive` scope, redirect to Google consent screen
+- [x] 4.4 Create `GET /api/v1/drive/callback` route (Admin only): exchange auth code for access + refresh tokens, encrypt and store on Club record, set `driveConnected = true`
+- [x] 4.5 Create `POST /api/v1/drive/disconnect` route (Admin only): revoke tokens via Google API, clear token fields on Club, set `driveConnected = false`
+- [x] 4.6 Create `GET /api/v1/drive/status` route (Admin only): return connection status, `lastSyncAt`, `driftUnresolvedCount`
 - [ ] 4.7 Implement automatic token refresh in `DriveConnector`: before each Drive API call, check `driveTokenExpiry`, refresh if expired using the stored refresh token
 
 ## Task 5: Structure Analysis (Req 3)
