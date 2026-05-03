@@ -265,7 +265,7 @@ git pull
 - [x] 19.11 Create `SearchInput` component: search bar with 2-character minimum, semantic search toggle
 - [x] 19.12 Create `SearchResults` component: results list with file name, folder path, type, lastModified, tags; filter chips (type, folder, date range, uploader, tag); client-side filter application
 - [x] 19.13 Create `UploadHistoryPage` component: paginated list of user's uploads with file name, date, category, status
-- [ ] 19.14 Create `ArchitectureEditor` component: drag-and-drop tree editor, inline rename with Smart Folder Naming, draft mode indicator, "Activate" button, version history sidebar, rollback option, per-folder access control settings
+- [x] 19.14 Create `ArchitectureEditor` component: drag-and-drop tree editor, inline rename with Smart Folder Naming, draft mode indicator, "Activate" button, version history sidebar, rollback option, per-folder access control settings
 - [ ] 19.15 Create `UserManagement` component: user list, invite form (email + role), role change dropdown, remove user button, last admin protection UI feedback
 - [ ] 19.16 Create `AuditLogView` component: filterable log table (action type, user, date range), paginated
 - [ ] 19.17 Create `DriveSyncPanel` component: Drive Sync Status indicator (last sync time, drift count), unresolved drift items list with accept/ignore actions
