@@ -69,7 +69,7 @@ git pull
 - [x] 5.3 Build in-memory tree from flat file list using `parents` field; handle permission errors (403/404) by skipping and logging inaccessible paths
 - [x] 5.4 Create `POST /api/v1/structure/analyze` route (Admin only): start traversal as an async job, return job ID
 - [x] 5.5 Create `GET /api/v1/structure/analyze/:jobId` route (Admin only): return job status (pending/running/complete/failed) and result
-- [ ] 5.6 On completion, store the structured representation in the Metadata Store: create `Category` records for folders, `FileMeta` records for files with `driveFileId` references
+- [x] 5.6 On completion, store the structured representation in the Metadata Store: create `Category` records for folders, `FileMeta` records for files with `driveFileId` references
 - [ ] 5.7 Write property-based test for P9 (Metadata-Only Storage): verify that after analysis, no `FileMeta` record contains binary content, only `driveFileId` references
 
 ## Task 6: AI Architecture Proposals (Req 4, 17)
