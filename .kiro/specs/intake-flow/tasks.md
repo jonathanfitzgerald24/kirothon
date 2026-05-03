@@ -27,7 +27,7 @@ git pull
 - [x] 2.12 Define `AuditLog` model: id, clubId (FK), userId (FK nullable), action, resourceType, resourceId, details (Json), createdAt; indexes on (clubId, createdAt), (clubId, action), (clubId, userId)
 - [x] 2.13 Define `Invitation` model: id, clubId (FK), email, role, token (unique), expiresAt, usedAt, createdAt
 - [x] 2.14 Define `Notification` model: id, clubId (FK), userId (FK), type, title, body, resourceId, isRead, isDismissed, createdAt; index on (userId, isRead, createdAt)
-- [ ] 2.15 Define `FileRequest` model: id, clubId (FK), requesterId (FK), description, fulfilledFileId, fulfilledAt, createdAt
+- [x] 2.15 Define `FileRequest` model: id, clubId (FK), requesterId (FK), description, fulfilledFileId, fulfilledAt, createdAt
 - [ ] 2.16 Define `StructuralDrift` model: id, clubId, changeType, drivePath, driveId, resolved, resolution, createdAt
 - [ ] 2.17 Define `AccessRequest` model: id, userId, categoryId, status (default PENDING), resolvedBy, resolvedAt, createdAt
 - [ ] 2.18 Add database indexes on `FileMeta`: (clubId, categoryId), (clubId, name), (clubId, uploadedAt), (clubId, uploaderId); on `Category`: (clubId, parentId); on `Tag`: (name)
