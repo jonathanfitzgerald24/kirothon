@@ -54,7 +54,7 @@ git pull
 
 ## Task 4: Google Drive Connection (Req 2)
 
-- [ ] 4.1 Install `googleapis` npm package and create `server/src/services/driveConnector.ts` with a `DriveConnector` class
+- [x] 4.1 Install `googleapis` npm package and create `server/src/services/driveConnector.ts` with a `DriveConnector` class
 - [ ] 4.2 Implement AES-256-GCM encryption/decryption utility for storing OAuth tokens at rest, using `ENCRYPTION_KEY` from environment
 - [ ] 4.3 Create `GET /api/v1/drive/connect` route (Admin only): generate Google OAuth URL with `https://www.googleapis.com/auth/drive` scope, redirect to Google consent screen
 - [ ] 4.4 Create `GET /api/v1/drive/callback` route (Admin only): exchange auth code for access + refresh tokens, encrypt and store on Club record, set `driveConnected = true`
