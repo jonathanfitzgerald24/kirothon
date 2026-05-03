@@ -5,6 +5,7 @@
 IntakeFlow is an AI-powered file organization and access platform for college clubs. It sits on top of Google Drive to provide a cleaner browsing experience, an AI-assisted folder architecture setup, automated upload routing, and role-based access control for internal club leadership and members. The platform is intended exclusively for internal use by club admins, moderators, and approved members — not for public access.
 
 The core product flow has two phases:
+
 1. **Initial setup**: Connect Google Drive → AI analyzes existing structure → Admin reviews and approves a proposed folder architecture → System builds the approved structure.
 2. **Ongoing usage**: Upload new files → System auto-routes or prompts for placement → Approved users browse, view, and download files through the portal.
 
