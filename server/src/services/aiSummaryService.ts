@@ -1,7 +1,7 @@
 import { prisma } from '../lib/prisma'
-import { GeminiClient } from './geminiClient'
+import { geminiClient } from './geminiClient'
 
-const gemini = new GeminiClient()
+const gemini = geminiClient
 
 const SUPPORTED_TYPES = [
   'application/pdf',
@@ -30,7 +30,7 @@ File size: ${file.sizeBytes} bytes
 
 Return only the summary sentence, no quotes or extra formatting.`
 
-    const summary = await gemini.generate(prompt, 'flash')
+    const summary = await gemini.generateContent('gemini-1.5-flash', prompt)
     const cleaned = summary.trim().replace(/^["']|["']$/g, '')
 
     await prisma.fileMeta.update({

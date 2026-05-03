@@ -1,6 +1,6 @@
 import { prisma } from '../lib/prisma'
 import { Role } from '@prisma/client'
-import { GeminiClient } from './geminiClient'
+import { geminiClient } from './geminiClient'
 
 const roleLevel = { MEMBER: 1, MOD: 2, ADMIN: 3 } as const
 
@@ -97,13 +97,12 @@ export class SearchService {
       summary: f.aiSummary ?? '',
     }))
 
-    const gemini = new GeminiClient()
     const prompt = `Given this search query: "${query}"
 And these files: ${JSON.stringify(fileContext)}
 Return a JSON array of file IDs ranked by relevance to the query. Only include relevant files.
 Format: ["id1", "id2", ...]`
 
-    const response = await gemini.generate(prompt, 'flash')
+    const response = await geminiClient.generateContent('gemini-1.5-flash', prompt)
     let rankedIds: string[] = []
     try {
       rankedIds = JSON.parse(response)

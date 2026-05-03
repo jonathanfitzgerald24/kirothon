@@ -1,0 +1,1 @@
+{"version":3,"file":"aiTagService.d.ts","sourceRoot":"","sources":["../../src/services/aiTagService.ts"],"names":[],"mappings":"AAKA,qBAAa,YAAY;IACjB,YAAY,CAAC,MAAM,EAAE,MAAM,GAAG,OAAO,CAAC,MAAM,EAAE,CAAC;IAqC/C,YAAY,CAAC,MAAM,EAAE,MAAM,EAAE,IAAI,EAAE,MAAM;;;;;;;IAQzC,SAAS,CAAC,MAAM,EAAE,MAAM,EAAE,IAAI,EAAE,MAAM;CAG7C;AAED,eAAO,MAAM,YAAY,cAAqB,CAAA"}

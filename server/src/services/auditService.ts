@@ -1,4 +1,5 @@
 import { prisma } from '../lib/prisma'
+import { Prisma } from '@prisma/client'
 
 export interface AuditLogParams {
   clubId: string
@@ -18,7 +19,7 @@ export class AuditService {
         action: params.action,
         resourceType: params.resourceType ?? null,
         resourceId: params.resourceId ?? null,
-        details: params.details ?? undefined,
+        details: (params.details ?? undefined) as Prisma.InputJsonValue | undefined,
       },
     })
   }

@@ -1,7 +1,7 @@
 import { prisma } from '../lib/prisma'
-import { GeminiClient } from './geminiClient'
+import { geminiClient } from './geminiClient'
 
-const gemini = new GeminiClient()
+const gemini = geminiClient
 
 export class AITagService {
   async generateTags(fileId: string): Promise<string[]> {
@@ -19,7 +19,7 @@ Folder: ${file.category?.name ?? 'Unsorted'}
 
 Return a JSON array of strings, e.g. ["tag1", "tag2"]. Tags should be lowercase, 1-2 words each.`
 
-    const response = await gemini.generate(prompt, 'flash')
+    const response = await gemini.generateContent('gemini-1.5-flash', prompt)
     let tags: string[] = []
     try {
       tags = JSON.parse(response)

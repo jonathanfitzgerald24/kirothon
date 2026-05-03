@@ -3,11 +3,11 @@ import { Role } from '@prisma/client'
 import { requireAuth, requireRole } from '../middleware/auth'
 import { aiTagService } from '../services/aiTagService'
 import { prisma } from '../lib/prisma'
-import { GeminiClient } from '../services/geminiClient'
+import { geminiClient } from '../services/geminiClient'
 
 export const aiRouter = Router()
 
-const gemini = new GeminiClient()
+const gemini = geminiClient
 
 // POST /api/v1/ai/tags/:fileId — regenerate auto-tags
 aiRouter.post('/tags/:fileId', requireRole(Role.MOD), async (req, res) => {
@@ -63,7 +63,7 @@ If the name is fine, return the same name.
 
 Return only the suggested name as plain text, nothing else.`
 
-    const suggestion = await gemini.generate(prompt, 'flash')
+    const suggestion = await gemini.generateContent('gemini-1.5-flash', prompt)
     const cleaned = suggestion.trim().replace(/^["']|["']$/g, '')
 
     res.json({
@@ -100,7 +100,7 @@ Return a JSON object with:
   ]
 }`
 
-    const response = await gemini.generate(prompt, 'pro')
+    const response = await gemini.generateContent('gemini-1.5-pro', prompt)
     let suggestions = []
     try {
       const parsed = JSON.parse(response)

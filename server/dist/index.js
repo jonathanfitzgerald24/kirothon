@@ -1,0 +1,58 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
+const express_1 = __importDefault(require("express"));
+const session_1 = require("./lib/session");
+const passport_1 = __importDefault(require("./lib/passport"));
+const auth_1 = require("./routes/auth");
+const drive_1 = require("./routes/drive");
+const structure_1 = require("./routes/structure");
+const architecture_1 = require("./routes/architecture");
+const auditLogs_1 = require("./routes/auditLogs");
+const users_1 = require("./routes/users");
+const favorites_1 = require("./routes/favorites");
+const quickAccess_1 = require("./routes/quickAccess");
+const fileRequests_1 = require("./routes/fileRequests");
+const notifications_1 = require("./routes/notifications");
+const search_1 = require("./routes/search");
+const ai_1 = require("./routes/ai");
+const setup_1 = require("./routes/setup");
+const demo_1 = require("./routes/demo");
+const portal_1 = require("./routes/portal");
+const upload_1 = require("./routes/upload");
+const app = (0, express_1.default)();
+const PORT = process.env.PORT || 3001;
+app.use(express_1.default.json());
+app.use(session_1.sessionMiddleware);
+app.use(passport_1.default.initialize());
+app.use(passport_1.default.session());
+app.get('/health', (_req, res) => {
+    res.json({ status: 'ok' });
+});
+app.use('/api/v1/auth', auth_1.authRouter);
+app.use('/api/v1/drive', drive_1.driveRouter);
+app.use('/api/v1/structure', structure_1.structureRouter);
+app.use('/api/v1/architecture', architecture_1.architectureRouter);
+app.use('/api/v1/audit-logs', auditLogs_1.auditLogsRouter);
+app.use('/api/v1/users', users_1.usersRouter);
+app.use('/api/v1/categories', users_1.usersRouter);
+app.use('/api/v1/access-requests', users_1.usersRouter);
+app.use('/api/v1/favorites', favorites_1.favoritesRouter);
+app.use('/api/v1/quick-access', quickAccess_1.quickAccessRouter);
+app.use('/api/v1/file-requests', fileRequests_1.fileRequestsRouter);
+app.use('/api/v1/notifications', notifications_1.notificationsRouter);
+app.use('/api/v1/activity', notifications_1.activityRouter);
+app.use('/api/v1/search', search_1.searchRouter);
+app.use('/api/v1/ai', ai_1.aiRouter);
+app.use('/api/v1/setup', setup_1.setupRouter);
+app.use('/api/v1/demo', demo_1.demoRouter);
+app.use('/api/v1/portal', portal_1.portalRouter);
+app.use('/api/v1/upload', upload_1.uploadRouter);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+exports.default = app;
+//# sourceMappingURL=index.js.map
