@@ -133,29 +133,29 @@ git pull
 
 ## Task 10: Search (Req 7, 28, 29, 30)
 
-- [x] 10.1 Create `server/src/services/searchService.ts` with a `SearchService` class
-- [x] 10.2 Implement standard search: query Metadata Store using `ILIKE` on file name, folder name, and tag name; apply filters (type, folder, date range, uploader, tag) as additional WHERE clauses; filter by user access permissions
-- [x] 10.3 Create `GET /api/v1/search` route: accept query params `q`, `type`, `folder`, `dateFrom`, `dateTo`, `uploader`, `tag`; return results with file name, folder path, type, lastModified, tags within 3 seconds
-- [x] 10.4 Implement semantic search (Req 29): when standard search returns < 3 results or user toggles semantic mode, send query + file metadata to Gemini 1.5 Flash, return ranked results labeled as "AI-assisted"
-- [x] 10.5 Create `GET /api/v1/search/semantic` route: accept query, return AI-ranked results
-- [x] 10.6 Implement similar files (Req 30): compare target file's tags, folder path, and AI summary against all files using Gemini 1.5 Flash, return up to 5 matches filtered by user access, cache results for 1 hour
-- [x] 10.7 Create `GET /api/v1/portal/file/:fileId/similar` route: return similar files for "Files Like This" sidebar
+- [ ] 10.1 Create `server/src/services/searchService.ts` with a `SearchService` class
+- [ ] 10.2 Implement standard search: query Metadata Store using `ILIKE` on file name, folder name, and tag name; apply filters (type, folder, date range, uploader, tag) as additional WHERE clauses; filter by user access permissions
+- [ ] 10.3 Create `GET /api/v1/search` route: accept query params `q`, `type`, `folder`, `dateFrom`, `dateTo`, `uploader`, `tag`; return results with file name, folder path, type, lastModified, tags within 3 seconds
+- [ ] 10.4 Implement semantic search (Req 29): when standard search returns < 3 results or user toggles semantic mode, send query + file metadata to Gemini 1.5 Flash, return ranked results labeled as "AI-assisted"
+- [ ] 10.5 Create `GET /api/v1/search/semantic` route: accept query, return AI-ranked results
+- [ ] 10.6 Implement similar files (Req 30): compare target file's tags, folder path, and AI summary against all files using Gemini 1.5 Flash, return up to 5 matches filtered by user access, cache results for 1 hour
+- [ ] 10.7 Create `GET /api/v1/portal/file/:fileId/similar` route: return similar files for "Files Like This" sidebar
 
 ## Task 11: User and Role Management (Req 12, 13, 44)
 
-- [x] 11.1 Create `server/src/services/userService.ts` with a `UserService` class
-- [x] 11.2 Create `GET /api/v1/users` route (Admin only): list all users in the club with role, email, lastLoginAt
-- [x] 11.3 Implement invitation flow: generate UUID token, create `Invitation` record with 72-hour expiry, send email via SendGrid/Nodemailer with link `{baseUrl}/invite/{token}`
-- [x] 11.4 Create `POST /api/v1/users/invite` route (Admin only): validate email + role, create invitation, send email
-- [x] 11.5 Create invitation acceptance handler: validate token not expired and not used, show registration form, create user with assigned role, mark invitation as used
-- [x] 11.6 Implement last admin protection: before any role change or user removal, check `COUNT(*) FROM users WHERE clubId = ? AND role = 'ADMIN'`, reject if count would drop to 0
-- [x] 11.7 Create `PUT /api/v1/users/:userId/role` route (Admin only): change user's role (cannot change own role), enforce last admin protection
-- [x] 11.8 Create `DELETE /api/v1/users/:userId` route (Admin only): remove user, revoke their session, enforce last admin protection
-- [x] 11.9 Create `PUT /api/v1/categories/:categoryId/minimum-role` route (Admin only): set minimum role for a category
-- [x] 11.10 Create `POST /api/v1/categories/:categoryId/access` route (Admin only): grant individual access to a specific user
-- [x] 11.11 Create `DELETE /api/v1/categories/:categoryId/access/:userId` route (Admin only): revoke individual access, immediately effective
-- [x] 11.12 Create `POST /api/v1/access-requests` route (Mod, Member): submit access request for a restricted category
-- [x] 11.13 Create `PUT /api/v1/access-requests/:requestId` route (Admin only): approve (grant access + notify requester) or deny (notify requester)
+- [ ] 11.1 Create `server/src/services/userService.ts` with a `UserService` class
+- [ ] 11.2 Create `GET /api/v1/users` route (Admin only): list all users in the club with role, email, lastLoginAt
+- [ ] 11.3 Implement invitation flow: generate UUID token, create `Invitation` record with 72-hour expiry, send email via SendGrid/Nodemailer with link `{baseUrl}/invite/{token}`
+- [ ] 11.4 Create `POST /api/v1/users/invite` route (Admin only): validate email + role, create invitation, send email
+- [ ] 11.5 Create invitation acceptance handler: validate token not expired and not used, show registration form, create user with assigned role, mark invitation as used
+- [ ] 11.6 Implement last admin protection: before any role change or user removal, check `COUNT(*) FROM users WHERE clubId = ? AND role = 'ADMIN'`, reject if count would drop to 0
+- [ ] 11.7 Create `PUT /api/v1/users/:userId/role` route (Admin only): change user's role (cannot change own role), enforce last admin protection
+- [ ] 11.8 Create `DELETE /api/v1/users/:userId` route (Admin only): remove user, revoke their session, enforce last admin protection
+- [ ] 11.9 Create `PUT /api/v1/categories/:categoryId/minimum-role` route (Admin only): set minimum role for a category
+- [ ] 11.10 Create `POST /api/v1/categories/:categoryId/access` route (Admin only): grant individual access to a specific user
+- [ ] 11.11 Create `DELETE /api/v1/categories/:categoryId/access/:userId` route (Admin only): revoke individual access, immediately effective
+- [ ] 11.12 Create `POST /api/v1/access-requests` route (Mod, Member): submit access request for a restricted category
+- [ ] 11.13 Create `PUT /api/v1/access-requests/:requestId` route (Admin only): approve (grant access + notify requester) or deny (notify requester)
 - [ ] 11.14 Write property-based test for P2 (Last Admin Invariant): generate sequences of role changes and user removals, verify admin count never drops to 0
 - [ ] 11.15 Write property-based test for P7 (Invitation Token Expiry): generate invitations with various ages, verify expired tokens are always rejected
 - [ ] 11.16 Write property-based test for P14 (Access Grant Symmetry): generate access grant/revoke sequences, verify access is immediately revoked after removal
@@ -163,29 +163,29 @@ git pull
 
 ## Task 12: Notifications and Real-Time (Req 45, 22)
 
-- [x] 12.1 Create `server/src/services/notificationService.ts` with a `NotificationService` class
-- [x] 12.2 Implement notification creation: create `Notification` record, push to user's SSE connection if active
-- [x] 12.3 Implement SSE infrastructure: create `GET /api/v1/notifications/stream` endpoint that holds open an SSE connection per authenticated user, manage connection pool
-- [x] 12.4 Create `GET /api/v1/notifications` route (any authenticated user): return notifications for the current user, filtered by role-appropriate types
-- [x] 12.5 Create `PUT /api/v1/notifications/:id/read` route: mark notification as read
-- [x] 12.6 Create `DELETE /api/v1/notifications/:id` route: dismiss notification
-- [x] 12.7 Implement Activity Feed SSE: create `GET /api/v1/activity/stream` endpoint for real-time activity feed updates
-- [x] 12.8 Create `GET /api/v1/activity/feed` route: return last 20 activity entries (file uploads, placements, architecture changes, member joins) from audit log
+- [ ] 12.1 Create `server/src/services/notificationService.ts` with a `NotificationService` class
+- [ ] 12.2 Implement notification creation: create `Notification` record, push to user's SSE connection if active
+- [ ] 12.3 Implement SSE infrastructure: create `GET /api/v1/notifications/stream` endpoint that holds open an SSE connection per authenticated user, manage connection pool
+- [ ] 12.4 Create `GET /api/v1/notifications` route (any authenticated user): return notifications for the current user, filtered by role-appropriate types
+- [ ] 12.5 Create `PUT /api/v1/notifications/:id/read` route: mark notification as read
+- [ ] 12.6 Create `DELETE /api/v1/notifications/:id` route: dismiss notification
+- [ ] 12.7 Implement Activity Feed SSE: create `GET /api/v1/activity/stream` endpoint for real-time activity feed updates
+- [ ] 12.8 Create `GET /api/v1/activity/feed` route: return last 20 activity entries (file uploads, placements, architecture changes, member joins) from audit log
 
 ## Task 13: AI Features — Tags, Summaries, Descriptions, Reorganization, Smart Naming (Req 21, 38, 39, 41, 42)
 
-- [x] 13.1 Create `server/src/services/aiTagService.ts`: on file creation, send file name, type, and folder path to Gemini 1.5 Flash, generate up to 5 tags, store in Metadata Store
-- [x] 13.2 Create `server/src/services/aiSummaryService.ts`: for supported types (PDF, Google Docs, Slides, plain text) under 10MB, extract first 5,000 chars of content, send to Gemini 1.5 Flash, store one-sentence summary in `FileMeta.aiSummary`
-- [x] 13.3 Implement folder description generation in `aiArchitect.ts`: when a category is created, generate one-sentence description via Gemini 1.5 Flash based on folder name and hierarchy position, store in `Category.description`
-- [x] 13.4 Implement re-organization suggestions (Req 41): analyze full architecture tree + recent placements + Unsorted files via Gemini 1.5 Pro, return structured plan (files to relocate, folders to merge/rename, new categories)
-- [x] 13.5 Implement auto-trigger for re-organization: when Unsorted folder exceeds 10 files, automatically trigger analysis and surface suggestions to Admin
-- [x] 13.6 Create `GET /api/v1/ai/reorganize` route (Admin only): trigger on-demand re-organization analysis
+- [ ] 13.1 Create `server/src/services/aiTagService.ts`: on file creation, send file name, type, and folder path to Gemini 1.5 Flash, generate up to 5 tags, store in Metadata Store
+- [ ] 13.2 Create `server/src/services/aiSummaryService.ts`: for supported types (PDF, Google Docs, Slides, plain text) under 10MB, extract first 5,000 chars of content, send to Gemini 1.5 Flash, store one-sentence summary in `FileMeta.aiSummary`
+- [ ] 13.3 Implement folder description generation in `aiArchitect.ts`: when a category is created, generate one-sentence description via Gemini 1.5 Flash based on folder name and hierarchy position, store in `Category.description`
+- [ ] 13.4 Implement re-organization suggestions (Req 41): analyze full architecture tree + recent placements + Unsorted files via Gemini 1.5 Pro, return structured plan (files to relocate, folders to merge/rename, new categories)
+- [ ] 13.5 Implement auto-trigger for re-organization: when Unsorted folder exceeds 10 files, automatically trigger analysis and surface suggestions to Admin
+- [ ] 13.6 Create `GET /api/v1/ai/reorganize` route (Admin only): trigger on-demand re-organization analysis
 - [ ] 13.7 Create `GET /api/v1/ai/reorganize/suggestions` route (Admin only): return current suggestions
 - [ ] 13.8 Create `PUT /api/v1/ai/reorganize/suggestions/:id` route (Admin only): accept or dismiss individual suggestions
-- [x] 13.9 Implement Smart Folder Naming (Req 42): send proposed category name + existing naming patterns to Gemini 1.5 Flash, return normalized suggestion if name deviates
-- [x] 13.10 Create `POST /api/v1/ai/smart-name` route (Admin, Mod): check a proposed category name, return suggestion if applicable
-- [x] 13.11 Create `POST /api/v1/ai/tags/:fileId` route (Admin, Mod): regenerate auto-tags for a file
-- [x] 13.12 Create `PUT /api/v1/ai/tags/:fileId` route (Admin, Mod): manually add or remove tags
+- [ ] 13.9 Implement Smart Folder Naming (Req 42): send proposed category name + existing naming patterns to Gemini 1.5 Flash, return normalized suggestion if name deviates
+- [ ] 13.10 Create `POST /api/v1/ai/smart-name` route (Admin, Mod): check a proposed category name, return suggestion if applicable
+- [ ] 13.11 Create `POST /api/v1/ai/tags/:fileId` route (Admin, Mod): regenerate auto-tags for a file
+- [ ] 13.12 Create `PUT /api/v1/ai/tags/:fileId` route (Admin, Mod): manually add or remove tags
 - [ ] 13.13 Write property-based test for P12 (Tag Cardinality): generate tag creation sequences, verify auto-generated tag count never exceeds 5 per file
 
 ## Task 14: Audit Logging (Req 14)
@@ -211,28 +211,28 @@ git pull
 
 ## Task 16: Setup Wizard, Demo Mode, and Club Type (Req 16, 17, 18)
 
-- [x] 16.1 Create `GET /api/v1/setup/status` route (Admin only): return current setup step (0-4) and completion state per step
-- [x] 16.2 Implement setup step progression: Connect Drive (0→1), Analyze Structure (1→2), Approve Architecture (2→3), Invite Team (3→4); enforce sequential unlocking
-- [x] 16.3 Create `PUT /api/v1/setup/club-type` route (Admin only): set club type on Club record for AI context during architecture proposals
-- [x] 16.4 Create `server/src/services/demoService.ts`: clone pre-seeded demo data into a temporary club with `demoMode = true`
+- [ ] 16.1 Create `GET /api/v1/setup/status` route (Admin only): return current setup step (0-4) and completion state per step
+- [ ] 16.2 Implement setup step progression: Connect Drive (0→1), Analyze Structure (1→2), Approve Architecture (2→3), Invite Team (3→4); enforce sequential unlocking
+- [ ] 16.3 Create `PUT /api/v1/setup/club-type` route (Admin only): set club type on Club record for AI context during architecture proposals
+- [ ] 16.4 Create `server/src/services/demoService.ts`: clone pre-seeded demo data into a temporary club with `demoMode = true`
 - [ ] 16.5 Create `server/src/middleware/demoGuard.ts`: intercept all `DriveConnector` calls when `club.demoMode = true`, return mock responses instead of calling real Drive API
-- [x] 16.6 Create `POST /api/v1/demo/start` route (no auth required): enter demo mode, create sandboxed session with sample data
-- [x] 16.7 Create `GET /api/v1/demo/status` route: check if current session is in demo mode
-- [x] 16.8 Create `server/src/jobs/demoCleanup.ts`: scheduled job to clean up demo club data after 24 hours of inactivity
+- [ ] 16.6 Create `POST /api/v1/demo/start` route (no auth required): enter demo mode, create sandboxed session with sample data
+- [ ] 16.7 Create `GET /api/v1/demo/status` route: check if current session is in demo mode
+- [ ] 16.8 Create `server/src/jobs/demoCleanup.ts`: scheduled job to clean up demo club data after 24 hours of inactivity
 - [ ] 16.9 Write property-based test for P11 (Demo Mode Isolation): generate sequences of Drive operations in demo mode, verify none reach the real Drive API
 
 
 ## Task 17: Favorites, Quick Access, and File Requests (Req 20, 23, 43)
 
-- [x] 17.1 Create `POST /api/v1/favorites/:fileId` route (any authenticated user): add file to favorites after verifying user has access to the file
-- [x] 17.2 Create `DELETE /api/v1/favorites/:fileId` route: remove file from favorites
-- [x] 17.3 Create `GET /api/v1/favorites` route: return current user's favorited files, filtered to only include files the user still has permission to view
-- [x] 17.4 Create `POST /api/v1/quick-access/:fileId` route (Admin only): pin file to Quick Access, enforce max 10 limit (return 400 if exceeded)
-- [x] 17.5 Create `DELETE /api/v1/quick-access/:fileId` route (Admin only): unpin file from Quick Access
-- [x] 17.6 Create `GET /api/v1/quick-access` route (any authenticated user): return Quick Access files with name, type, containing folder; apply role-based permission checks
-- [x] 17.7 Create `POST /api/v1/file-requests` route (Member only): submit a file request with description
-- [x] 17.8 Create `GET /api/v1/file-requests` route (Admin, Mod): list open file requests
-- [x] 17.9 Create `PUT /api/v1/file-requests/:id/fulfill` route (Admin, Mod): link an uploaded file to a request, notify the requesting member
+- [ ] 17.1 Create `POST /api/v1/favorites/:fileId` route (any authenticated user): add file to favorites after verifying user has access to the file
+- [ ] 17.2 Create `DELETE /api/v1/favorites/:fileId` route: remove file from favorites
+- [ ] 17.3 Create `GET /api/v1/favorites` route: return current user's favorited files, filtered to only include files the user still has permission to view
+- [ ] 17.4 Create `POST /api/v1/quick-access/:fileId` route (Admin only): pin file to Quick Access, enforce max 10 limit (return 400 if exceeded)
+- [ ] 17.5 Create `DELETE /api/v1/quick-access/:fileId` route (Admin only): unpin file from Quick Access
+- [ ] 17.6 Create `GET /api/v1/quick-access` route (any authenticated user): return Quick Access files with name, type, containing folder; apply role-based permission checks
+- [ ] 17.7 Create `POST /api/v1/file-requests` route (Member only): submit a file request with description
+- [ ] 17.8 Create `GET /api/v1/file-requests` route (Admin, Mod): list open file requests
+- [ ] 17.9 Create `PUT /api/v1/file-requests/:id/fulfill` route (Admin, Mod): link an uploaded file to a request, notify the requesting member
 - [ ] 17.10 Write property-based test for P5 (Quick Access Cardinality): generate sequences of pin/unpin operations, verify count never exceeds 10
 - [ ] 17.11 Write property-based test for P15 (Favorite Permission Consistency): generate favorite + access revocation sequences, verify revoked files are excluded from favorites list
 
