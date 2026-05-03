@@ -169,7 +169,7 @@ git pull
 - [x] 12.4 Create `GET /api/v1/notifications` route (any authenticated user): return notifications for the current user, filtered by role-appropriate types
 - [x] 12.5 Create `PUT /api/v1/notifications/:id/read` route: mark notification as read
 - [x] 12.6 Create `DELETE /api/v1/notifications/:id` route: dismiss notification
-- [ ] 12.7 Implement Activity Feed SSE: create `GET /api/v1/activity/stream` endpoint for real-time activity feed updates
+- [x] 12.7 Implement Activity Feed SSE: create `GET /api/v1/activity/stream` endpoint for real-time activity feed updates
 - [ ] 12.8 Create `GET /api/v1/activity/feed` route: return last 20 activity entries (file uploads, placements, architecture changes, member joins) from audit log
 
 ## Task 13: AI Features — Tags, Summaries, Descriptions, Reorganization, Smart Naming (Req 21, 38, 39, 41, 42)
