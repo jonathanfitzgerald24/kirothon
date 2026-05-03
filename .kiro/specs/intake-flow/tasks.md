@@ -135,7 +135,7 @@ git pull
 
 - [x] 10.1 Create `server/src/services/searchService.ts` with a `SearchService` class
 - [x] 10.2 Implement standard search: query Metadata Store using `ILIKE` on file name, folder name, and tag name; apply filters (type, folder, date range, uploader, tag) as additional WHERE clauses; filter by user access permissions
-- [ ] 10.3 Create `GET /api/v1/search` route: accept query params `q`, `type`, `folder`, `dateFrom`, `dateTo`, `uploader`, `tag`; return results with file name, folder path, type, lastModified, tags within 3 seconds
+- [x] 10.3 Create `GET /api/v1/search` route: accept query params `q`, `type`, `folder`, `dateFrom`, `dateTo`, `uploader`, `tag`; return results with file name, folder path, type, lastModified, tags within 3 seconds
 - [ ] 10.4 Implement semantic search (Req 29): when standard search returns < 3 results or user toggles semantic mode, send query + file metadata to Gemini 1.5 Flash, return ranked results labeled as "AI-assisted"
 - [ ] 10.5 Create `GET /api/v1/search/semantic` route: accept query, return AI-ranked results
 - [ ] 10.6 Implement similar files (Req 30): compare target file's tags, folder path, and AI summary against all files using Gemini 1.5 Flash, return up to 5 matches filtered by user access, cache results for 1 hour
