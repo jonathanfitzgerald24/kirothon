@@ -30,7 +30,7 @@ export const DashboardPage = () => {
           <Link to="/upload" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
             <Upload className="h-5 w-5 text-blue-500" /> Upload Files
           </Link>
-          <Link to="/portal/folder/root" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
+          <Link to="/" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
             <FolderTree className="h-5 w-5 text-green-500" /> Browse Files
           </Link>
           <Link to="/admin/users" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
