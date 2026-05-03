@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { ActivityFeed } from '@/components/dashboard/ActivityFeed';
 import { ClubActivityDashboard } from '@/components/dashboard/ClubActivityDashboard';
 import { SetupWizard } from '@/components/setup/SetupWizard';
 import { FirstLoginOrientation } from '@/components/FirstLoginOrientation';
+import { Sparkles, Upload, FolderTree, Users } from 'lucide-react';
 
 export const DashboardPage = () => {
   const { user, club, role } = useAuth();
@@ -18,6 +20,24 @@ export const DashboardPage = () => {
       <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
         {club?.name}
       </p>
+
+      {/* Quick actions */}
+      {role === 'ADMIN' && (
+        <div className="mt-4 grid gap-3 sm:grid-cols-4">
+          <Link to="/admin/architecture" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
+            <Sparkles className="h-5 w-5 text-yellow-500" /> AI Architecture
+          </Link>
+          <Link to="/upload" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
+            <Upload className="h-5 w-5 text-blue-500" /> Upload Files
+          </Link>
+          <Link to="/portal/folder/root" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
+            <FolderTree className="h-5 w-5 text-green-500" /> Browse Files
+          </Link>
+          <Link to="/admin/users" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
+            <Users className="h-5 w-5 text-purple-500" /> Manage Team
+          </Link>
+        </div>
+      )}
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         {/* Main column */}

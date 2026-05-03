@@ -21,13 +21,28 @@ export class SearchService {
   ) {
     const where: Record<string, unknown> = { clubId }
 
-    // Text search on name, tags, and category name
+    // Text search on name, tags, category name, AI summary, and upload note
     if (params.q) {
       where.OR = [
         { name: { contains: params.q, mode: 'insensitive' } },
         { tags: { some: { name: { contains: params.q, mode: 'insensitive' } } } },
         { category: { name: { contains: params.q, mode: 'insensitive' } } },
+        { aiSummary: { contains: params.q, mode: 'insensitive' } },
+        { routingExplanation: { contains: params.q, mode: 'insensitive' } },
+        { uploadNote: { contains: params.q, mode: 'insensitive' } },
       ]
+      // Also try individual words for natural language queries
+      const words = params.q.split(/\s+/).filter(w => w.length >= 3)
+      if (words.length > 1) {
+        for (const word of words) {
+          ;(where.OR as Array<Record<string, unknown>>).push(
+            { name: { contains: word, mode: 'insensitive' } },
+            { tags: { some: { name: { contains: word, mode: 'insensitive' } } } },
+            { category: { name: { contains: word, mode: 'insensitive' } } },
+            { aiSummary: { contains: word, mode: 'insensitive' } },
+          )
+        }
+      }
     }
 
     if (params.type) {
