@@ -58,7 +58,7 @@ git pull
 - [x] 4.2 Implement AES-256-GCM encryption/decryption utility for storing OAuth tokens at rest, using `ENCRYPTION_KEY` from environment
 - [x] 4.3 Create `GET /api/v1/drive/connect` route (Admin only): generate Google OAuth URL with `https://www.googleapis.com/auth/drive` scope, redirect to Google consent screen
 - [x] 4.4 Create `GET /api/v1/drive/callback` route (Admin only): exchange auth code for access + refresh tokens, encrypt and store on Club record, set `driveConnected = true`
-- [ ] 4.5 Create `POST /api/v1/drive/disconnect` route (Admin only): revoke tokens via Google API, clear token fields on Club, set `driveConnected = false`
+- [x] 4.5 Create `POST /api/v1/drive/disconnect` route (Admin only): revoke tokens via Google API, clear token fields on Club, set `driveConnected = false`
 - [ ] 4.6 Create `GET /api/v1/drive/status` route (Admin only): return connection status, `lastSyncAt`, `driftUnresolvedCount`
 - [ ] 4.7 Implement automatic token refresh in `DriveConnector`: before each Drive API call, check `driveTokenExpiry`, refresh if expired using the stored refresh token
 
