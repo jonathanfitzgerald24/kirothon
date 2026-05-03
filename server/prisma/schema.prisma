@@ -72,13 +72,12 @@ model User {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 
-  uploadedFiles  FileMeta[]    @relation("Uploader")
-  favorites      Favorite[]
-  accessGrants   AccessGrant[]
-  auditLogs      AuditLog[]
-  notifications  Notification[]
-  fileRequests   FileRequest[]
-  accessRequests AccessRequest[]
+  uploadedFiles FileMeta[]    @relation("Uploader")
+  favorites     Favorite[]
+  accessGrants  AccessGrant[]
+  auditLogs     AuditLog[]
+  notifications Notification[]
+  fileRequests  FileRequest[]
 }
 
 model Session {
@@ -119,9 +118,8 @@ model Category {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  files          FileMeta[]
-  accessGrants   AccessGrant[]
-  accessRequests AccessRequest[]
+  files        FileMeta[]
+  accessGrants AccessGrant[]
 
   @@index([clubId, parentId])
 }
@@ -205,7 +203,7 @@ model QuickAccessFile {
   createdAt DateTime @default(now())
 }
 
-// ─── Supporting Entities ──────────────────────────────────────────────────────
+// ─── Supporting Entities ─────────────────────────────────────────────────────
 
 model AuditLog {
   id           String   @id @default(uuid())
@@ -279,9 +277,7 @@ model StructuralDrift {
 model AccessRequest {
   id         String    @id @default(uuid())
   userId     String
-  user       User      @relation(fields: [userId], references: [id])
   categoryId String
-  category   Category  @relation(fields: [categoryId], references: [id])
   status     String    @default("PENDING") // PENDING, APPROVED, DENIED
   resolvedBy String?
   resolvedAt DateTime?

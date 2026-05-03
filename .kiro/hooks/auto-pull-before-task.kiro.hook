@@ -8,6 +8,6 @@
   },
   "then": {
     "type": "runCommand",
-    "command": "git pull --rebase"
+    "command": "git stash && git pull --rebase && git stash pop || git pull --rebase"
   }
 }
