@@ -279,7 +279,7 @@ git pull
 - [x] 20.5 Create `NotificationCenter` component: dropdown panel listing notifications with type icon, title, body, timestamp, read/dismiss actions; real-time updates via SSE
 - [x] 20.6 Create `SetupWizard` component: four-step stepper (Connect Drive, Analyze Structure, Approve Architecture, Invite Team), locked progression, progress indicator, club type selector in step 3
 - [x] 20.7 Create `FirstLoginOrientation` component: spotlight overlay highlighting folder tree, search bar, Quick Access; auto-dismiss after 20 seconds or on click; shown once per user
-- [ ] 20.8 Create `UserSettings` component: dark mode toggle, profile info display
+- [x] 20.8 Create `UserSettings` component: dark mode toggle, profile info display
 - [ ] 20.9 Create `NewBadge` component: "New" indicator on files/folders added/modified since user's last login, visible for up to 7 days, dismissed on view
 - [ ] 20.10 Create `GET /api/v1/portal/new-badges` route: return file/folder IDs with "New" badge status for the current user based on `lastLoginAt`
 - [ ] 20.11 Create `GET /api/v1/dashboard/admin` route (Admin only): return Club Activity Dashboard metrics (total files, uploads last 30 days, top uploaders, unresolved items)
