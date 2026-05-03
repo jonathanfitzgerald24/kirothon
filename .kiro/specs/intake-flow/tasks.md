@@ -153,7 +153,7 @@ git pull
 - [x] 11.8 Create `DELETE /api/v1/users/:userId` route (Admin only): remove user, revoke their session, enforce last admin protection
 - [x] 11.9 Create `PUT /api/v1/categories/:categoryId/minimum-role` route (Admin only): set minimum role for a category
 - [x] 11.10 Create `POST /api/v1/categories/:categoryId/access` route (Admin only): grant individual access to a specific user
-- [ ] 11.11 Create `DELETE /api/v1/categories/:categoryId/access/:userId` route (Admin only): revoke individual access, immediately effective
+- [x] 11.11 Create `DELETE /api/v1/categories/:categoryId/access/:userId` route (Admin only): revoke individual access, immediately effective
 - [ ] 11.12 Create `POST /api/v1/access-requests` route (Mod, Member): submit access request for a restricted category
 - [ ] 11.13 Create `PUT /api/v1/access-requests/:requestId` route (Admin only): approve (grant access + notify requester) or deny (notify requester)
 - [ ] 11.14 Write property-based test for P2 (Last Admin Invariant): generate sequences of role changes and user removals, verify admin count never drops to 0
