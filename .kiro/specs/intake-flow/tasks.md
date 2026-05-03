@@ -16,7 +16,7 @@ git pull
 - [x] 2.1 Define core enums in `schema.prisma`: `Role` (ADMIN, MOD, MEMBER), `PlacementStatus` (PLACED, PENDING, FAILED, UNSORTED)
 - [x] 2.2 Define `Club` model with all fields: id, name, clubType, Drive connection fields (driveConnected, encrypted tokens, webhook fields, pageToken), setupStep, demoMode, lastSyncAt, driftUnresolvedCount, timestamps
 - [x] 2.3 Define `User` model: id, email, passwordHash (nullable for OAuth-only), googleId, displayName, role, clubId (FK to Club), darkMode, firstLoginComplete, lastLoginAt, timestamps
-- [ ] 2.4 Define `Session` model: id, userId, data (Json), expiresAt, createdAt
+- [x] 2.4 Define `Session` model: id, userId, data (Json), expiresAt, createdAt
 - [ ] 2.5 Define `ArchitectureVersion` model: id, clubId (FK), version, treeSnapshot (Json), isActive, isDraft, activatedAt, createdAt
 - [ ] 2.6 Define `Category` model: id, clubId (FK), name, parentId (self-referential FK), driveFolderId, description, minimumRole (default MEMBER), sortOrder, lastUpdatedAt, timestamps
 - [ ] 2.7 Define `AccessGrant` model: id, userId (FK), categoryId (FK), createdAt; unique constraint on (userId, categoryId)
