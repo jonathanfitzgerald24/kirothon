@@ -40,7 +40,7 @@ git pull
 - [x] 3.2 Configure `express-session` with `connect-pg-simple` store, 24-hour `maxAge`, `httpOnly`, `secure`, `sameSite: lax` cookie settings
 - [x] 3.3 Implement Passport local strategy: validate email/password against `User` table using bcrypt compare
 - [x] 3.4 Implement Passport Google OAuth strategy: handle new user creation, existing account linking, and pending invitation matching (Req 19)
-- [ ] 3.5 Create `POST /api/v1/auth/register` route: validate input with zod (email, password complexity, club name), hash password with bcrypt (cost 12), create Club + User (Admin role), create session
+- [x] 3.5 Create `POST /api/v1/auth/register` route: validate input with zod (email, password complexity, club name), hash password with bcrypt (cost 12), create Club + User (Admin role), create session
 - [ ] 3.6 Create `POST /api/v1/auth/login` route: authenticate via Passport local, create session, update `lastLoginAt`
 - [ ] 3.7 Create `GET /api/v1/auth/google` and `GET /api/v1/auth/google/callback` routes: initiate and handle Google OAuth flow
 - [ ] 3.8 Create `POST /api/v1/auth/logout` route: destroy session
