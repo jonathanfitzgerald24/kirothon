@@ -4,6 +4,7 @@ import { sessionMiddleware } from './lib/session'
 import passport from './lib/passport'
 import { authRouter } from './routes/auth'
 import { driveRouter } from './routes/drive'
+import { structureRouter } from './routes/structure'
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -19,6 +20,7 @@ app.get('/health', (_req, res) => {
 
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/drive', driveRouter)
+app.use('/api/v1/structure', structureRouter)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
