@@ -74,7 +74,7 @@ git pull
 
 ## Task 6: AI Architecture Proposals (Req 4, 17)
 
-- [~] 6.1 Create `server/src/services/geminiClient.ts`: shared Gemini API client wrapping Google AI Studio, supporting both Gemini 1.5 Pro and Gemini 1.5 Flash model selection
+- [x] 6.1 Create `server/src/services/geminiClient.ts`: shared Gemini API client wrapping Google AI Studio, supporting both Gemini 1.5 Pro and Gemini 1.5 Flash model selection
 - [~] 6.2 Create `server/src/services/aiArchitect.ts` with an `AIArchitect` class
 - [~] 6.3 Implement proposal generation: build Gemini prompt with structure JSON and club type context, call Gemini 1.5 Pro, parse response into 2-3 proposal objects (folder tree JSON + rationale + folder descriptions)
 - [~] 6.4 Implement the three proposal types: PRESERVE (existing structure unchanged), REORGANIZE (cleaned-up hierarchy), FRESH (new structure based on club type patterns, only when structure is disorganized)
