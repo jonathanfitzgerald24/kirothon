@@ -1,13 +1,13 @@
 {
   "enabled": true,
   "name": "Auto-commit and Push on Task Complete",
-  "description": "Automatically stages, commits, and pushes all changes to git after a spec task is marked as completed",
+  "description": "Automatically stages, commits, pulls latest, then pushes all changes to git after a spec task is marked as completed",
   "version": "1",
   "when": {
     "type": "postTaskExecution"
   },
   "then": {
     "type": "runCommand",
-    "command": "git add -A && git diff --cached --quiet || (git commit -m \"task: complete task from intake-flow spec\" && git push)"
+    "command": "git add -A && git diff --cached --quiet || git commit -m \"task: complete task from intake-flow spec\" && git pull --rebase && git push"
   }
 }
