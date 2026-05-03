@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express'
 import { DriveConnector } from '../services/driveConnector'
+import { DriveSyncService } from '../services/driveSyncService'
 import { requireRole } from '../middleware/auth'
 import { prisma } from '../lib/prisma'
 import { Role } from '@prisma/client'
@@ -64,5 +65,55 @@ driveRouter.get('/status', requireRole(Role.ADMIN), async (req: Request, res: Re
     })
   } catch {
     res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Failed to get Drive status' } })
+  }
+})
+
+// POST /api/v1/drive/webhook — receive Drive change notifications (15.3)
+driveRouter.post('/webhook', async (req: Request, res: Response): Promise<void> => {
+  const channelId = req.headers['x-goog-channel-id'] as string
+  if (!channelId) { res.status(400).send(); return }
+
+  try {
+    const club = await prisma.club.findFirst({ where: { webhookChannelId: channelId } })
+    if (!club) { res.status(404).send(); return }
+
+    const syncService = new DriveSyncService(club.id)
+    await syncService.processChanges()
+
+    res.status(200).send()
+  } catch {
+    res.status(500).send()
+  }
+})
+
+// GET /api/v1/drive/drift — unresolved drift items (15.6)
+driveRouter.get('/drift', requireRole(Role.ADMIN), async (req: Request, res: Response): Promise<void> => {
+  const user = req.user as { clubId: string }
+  try {
+    const syncService = new DriveSyncService(user.clubId)
+    const items = await syncService.getDriftItems()
+    res.json({ items })
+  } catch {
+    res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Failed to get drift items' } })
+  }
+})
+
+// PUT /api/v1/drive/drift/:id — resolve drift item (15.7)
+driveRouter.put('/drift/:id', requireRole(Role.ADMIN), async (req: Request, res: Response): Promise<void> => {
+  const user = req.user as { clubId: string }
+  const { id } = req.params
+  const { resolution } = req.body as { resolution: 'ACCEPTED' | 'IGNORED' }
+
+  if (!resolution || !['ACCEPTED', 'IGNORED'].includes(resolution)) {
+    res.status(400).json({ error: { code: 'INVALID_INPUT', message: 'resolution must be ACCEPTED or IGNORED' } })
+    return
+  }
+
+  try {
+    const syncService = new DriveSyncService(user.clubId)
+    await syncService.resolveDrift(id, resolution)
+    res.json({ message: 'Drift resolved' })
+  } catch (err) {
+    res.status(500).json({ error: { code: 'RESOLVE_FAILED', message: err instanceof Error ? err.message : 'Failed to resolve drift' } })
   }
 })

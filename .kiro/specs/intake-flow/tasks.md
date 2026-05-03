@@ -95,20 +95,20 @@ git pull
 - [x] 7.10 Create `POST /api/v1/architecture/rollback/:versionId` route (Admin only): trigger rollback
 - [x] 7.11 Implement file migration: Admin chooses move or copy, AI determines target category per file using Gemini 1.5 Flash, files with confidence < 50 go to "Unsorted", call Drive API `files.update` (move) or `files.copy` (copy), stream progress via SSE
 - [x] 7.12 Create `POST /api/v1/architecture/migrate` route (Admin only): start migration job, return job ID
-- [x] 7.13 Create `GET /api/v1/architecture/migrate/:jobId` route (Admin only): return migration progress and summary
+- [ ] 7.13 Create `GET /api/v1/architecture/migrate/:jobId` route (Admin only): return migration progress and summary
 - [ ] 7.14 Write property-based test for P3 (Architecture Version Monotonicity): generate sequences of activations, verify version numbers are strictly increasing
 
 
 ## Task 8: File Portal — Browsing and Viewing (Req 7, 8, 24, 25, 26, 27)
 
-- [ ] 8.1 Create `filterByAccess` middleware: load user's role and `AccessGrant` records, filter out categories where `minimumRole > user.role` and no individual grant exists, return 403 for direct access violations
-- [ ] 8.2 Create `GET /api/v1/portal/tree` route: return the folder tree filtered by the user's access permissions, include `lastUpdatedAt` and "New" badge status per folder
-- [ ] 8.3 Create `GET /api/v1/portal/folder/:categoryId` route: return folder contents (subfolders + files with name, type, size, lastModified, uploader, tags), include `ancestors` array for breadcrumb (Req 25), apply access filtering
-- [ ] 8.4 Create `GET /api/v1/portal/file/:fileId` route: return full file metadata including tags, AI summary, upload note, uploader attribution, routing explanation ("Why here?"), apply access check
-- [ ] 8.5 Create `GET /api/v1/portal/file/:fileId/preview` route: proxy file content from Google Drive via `DriveConnector` using stored `driveFileId`, support PDF, images, Google Docs/Sheets/Slides export
-- [ ] 8.6 Create `GET /api/v1/portal/file/:fileId/download` route: proxy file download from Google Drive, set appropriate `Content-Disposition` header
-- [ ] 8.7 Create `POST /api/v1/portal/files/download` route: accept `{ fileIds: string[] }`, fetch each file from Drive, package as ZIP using `archiver`, stream to client
-- [ ] 8.8 Create `GET /api/v1/portal/timeline` route: return files ordered by `uploadedAt DESC`, grouped by month (`DATE_TRUNC`), filtered by user access, support folder and tag filters (Req 27)
+- [x] 8.1 Create `filterByAccess` middleware: load user's role and `AccessGrant` records, filter out categories where `minimumRole > user.role` and no individual grant exists, return 403 for direct access violations
+- [x] 8.2 Create `GET /api/v1/portal/tree` route: return the folder tree filtered by the user's access permissions, include `lastUpdatedAt` and "New" badge status per folder
+- [x] 8.3 Create `GET /api/v1/portal/folder/:categoryId` route: return folder contents (subfolders + files with name, type, size, lastModified, uploader, tags), include `ancestors` array for breadcrumb (Req 25), apply access filtering
+- [x] 8.4 Create `GET /api/v1/portal/file/:fileId` route: return full file metadata including tags, AI summary, upload note, uploader attribution, routing explanation ("Why here?"), apply access check
+- [x] 8.5 Create `GET /api/v1/portal/file/:fileId/preview` route: proxy file content from Google Drive via `DriveConnector` using stored `driveFileId`, support PDF, images, Google Docs/Sheets/Slides export
+- [x] 8.6 Create `GET /api/v1/portal/file/:fileId/download` route: proxy file download from Google Drive, set appropriate `Content-Disposition` header
+- [x] 8.7 Create `POST /api/v1/portal/files/download` route: accept `{ fileIds: string[] }`, fetch each file from Drive, package as ZIP using `archiver`, stream to client
+- [x] 8.8 Create `GET /api/v1/portal/timeline` route: return files ordered by `uploadedAt DESC`, grouped by month (`DATE_TRUNC`), filtered by user access, support folder and tag filters (Req 27)
 - [ ] 8.9 Create `GET /api/v1/portal/folder/:categoryId/hover` route: return top 5 most recently modified files and total file count for folder preview popover (Req 24), filtered by user access
 - [ ] 8.10 Write property-based test for P1 (Role Hierarchy Enforcement): generate random users, roles, categories with minimumRole, and access grants; verify access decisions match the property
 

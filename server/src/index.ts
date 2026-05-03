@@ -7,7 +7,6 @@ import { driveRouter } from './routes/drive'
 import { structureRouter } from './routes/structure'
 import { architectureRouter } from './routes/architecture'
 import { auditLogsRouter } from './routes/auditLogs'
-<<<<<<< HEAD
 import { usersRouter } from './routes/users'
 import { favoritesRouter } from './routes/favorites'
 import { quickAccessRouter } from './routes/quickAccess'
@@ -17,9 +16,8 @@ import { searchRouter } from './routes/search'
 import { aiRouter } from './routes/ai'
 import { setupRouter } from './routes/setup'
 import { demoRouter } from './routes/demo'
-=======
 import { portalRouter } from './routes/portal'
->>>>>>> 2c4598f (task: complete task from intake-flow spec)
+import { uploadRouter } from './routes/upload'
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -38,7 +36,6 @@ app.use('/api/v1/drive', driveRouter)
 app.use('/api/v1/structure', structureRouter)
 app.use('/api/v1/architecture', architectureRouter)
 app.use('/api/v1/audit-logs', auditLogsRouter)
-<<<<<<< HEAD
 app.use('/api/v1/users', usersRouter)
 app.use('/api/v1/categories', usersRouter)
 app.use('/api/v1/access-requests', usersRouter)
@@ -51,9 +48,8 @@ app.use('/api/v1/search', searchRouter)
 app.use('/api/v1/ai', aiRouter)
 app.use('/api/v1/setup', setupRouter)
 app.use('/api/v1/demo', demoRouter)
-=======
 app.use('/api/v1/portal', portalRouter)
->>>>>>> 2c4598f (task: complete task from intake-flow spec)
+app.use('/api/v1/upload', uploadRouter)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
