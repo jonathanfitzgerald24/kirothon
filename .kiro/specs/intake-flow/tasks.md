@@ -147,7 +147,7 @@ git pull
 - [x] 11.2 Create `GET /api/v1/users` route (Admin only): list all users in the club with role, email, lastLoginAt
 - [x] 11.3 Implement invitation flow: generate UUID token, create `Invitation` record with 72-hour expiry, send email via SendGrid/Nodemailer with link `{baseUrl}/invite/{token}`
 - [x] 11.4 Create `POST /api/v1/users/invite` route (Admin only): validate email + role, create invitation, send email
-- [ ] 11.5 Create invitation acceptance handler: validate token not expired and not used, show registration form, create user with assigned role, mark invitation as used
+- [x] 11.5 Create invitation acceptance handler: validate token not expired and not used, show registration form, create user with assigned role, mark invitation as used
 - [ ] 11.6 Implement last admin protection: before any role change or user removal, check `COUNT(*) FROM users WHERE clubId = ? AND role = 'ADMIN'`, reject if count would drop to 0
 - [ ] 11.7 Create `PUT /api/v1/users/:userId/role` route (Admin only): change user's role (cannot change own role), enforce last admin protection
 - [ ] 11.8 Create `DELETE /api/v1/users/:userId` route (Admin only): remove user, revoke their session, enforce last admin protection
