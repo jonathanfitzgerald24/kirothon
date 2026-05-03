@@ -232,7 +232,7 @@ git pull
 - [x] 17.6 Create `GET /api/v1/quick-access` route (any authenticated user): return Quick Access files with name, type, containing folder; apply role-based permission checks
 - [x] 17.7 Create `POST /api/v1/file-requests` route (Member only): submit a file request with description
 - [x] 17.8 Create `GET /api/v1/file-requests` route (Admin, Mod): list open file requests
-- [ ] 17.9 Create `PUT /api/v1/file-requests/:id/fulfill` route (Admin, Mod): link an uploaded file to a request, notify the requesting member
+- [x] 17.9 Create `PUT /api/v1/file-requests/:id/fulfill` route (Admin, Mod): link an uploaded file to a request, notify the requesting member
 - [ ] 17.10 Write property-based test for P5 (Quick Access Cardinality): generate sequences of pin/unpin operations, verify count never exceeds 10
 - [ ] 17.11 Write property-based test for P15 (Favorite Permission Consistency): generate favorite + access revocation sequences, verify revoked files are excluded from favorites list
 
