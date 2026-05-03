@@ -218,7 +218,7 @@ git pull
 - [ ] 16.5 Create `server/src/middleware/demoGuard.ts`: intercept all `DriveConnector` calls when `club.demoMode = true`, return mock responses instead of calling real Drive API
 - [x] 16.6 Create `POST /api/v1/demo/start` route (no auth required): enter demo mode, create sandboxed session with sample data
 - [x] 16.7 Create `GET /api/v1/demo/status` route: check if current session is in demo mode
-- [ ] 16.8 Create `server/src/jobs/demoCleanup.ts`: scheduled job to clean up demo club data after 24 hours of inactivity
+- [x] 16.8 Create `server/src/jobs/demoCleanup.ts`: scheduled job to clean up demo club data after 24 hours of inactivity
 - [ ] 16.9 Write property-based test for P11 (Demo Mode Isolation): generate sequences of Drive operations in demo mode, verify none reach the real Drive API
 
 
