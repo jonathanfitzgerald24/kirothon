@@ -44,7 +44,7 @@ git pull
 - [x] 3.6 Create `POST /api/v1/auth/login` route: authenticate via Passport local, create session, update `lastLoginAt`
 - [x] 3.7 Create `GET /api/v1/auth/google` and `GET /api/v1/auth/google/callback` routes: initiate and handle Google OAuth flow
 - [x] 3.8 Create `POST /api/v1/auth/logout` route: destroy session
-- [ ] 3.9 Create `GET /api/v1/auth/me` route: return current user profile, role, club info from session
+- [x] 3.9 Create `GET /api/v1/auth/me` route: return current user profile, role, club info from session
 - [ ] 3.10 Create `auth` middleware: validate session exists and is not expired, attach user to request
 - [ ] 3.11 Create `requireRole(minimumRole)` middleware: check `roleLevel(user.role) >= roleLevel(minimumRole)`, return 403 if insufficient
 - [ ] 3.12 Create `validate(schema)` middleware: validate request body/query/params against a zod schema, return 400 with structured error on failure
