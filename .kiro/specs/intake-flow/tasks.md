@@ -49,7 +49,7 @@ git pull
 - [x] 3.11 Create `requireRole(minimumRole)` middleware: check `roleLevel(user.role) >= roleLevel(minimumRole)`, return 403 if insufficient
 - [x] 3.12 Create `validate(schema)` middleware: validate request body/query/params against a zod schema, return 400 with structured error on failure
 - [x] 3.13 Configure CSRF protection via `csurf` middleware for all state-changing routes
-- [ ] 3.14 Write property-based test for P6 (Session Expiry Enforcement): generate random session ages, verify sessions older than 24 hours are rejected
+- [x] 3.14 Write property-based test for P6 (Session Expiry Enforcement): generate random session ages, verify sessions older than 24 hours are rejected
 
 
 ## Task 4: Google Drive Connection (Req 2)
