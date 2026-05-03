@@ -238,17 +238,17 @@ git pull
 
 ## Task 18: Frontend — Core Shell, Auth, and Routing
 
-- [ ] 18.1 Create `AuthContext` and `AuthProvider`: manage session state, expose `user`, `role`, `club`, `login()`, `logout()`, `isAuthenticated`
-- [ ] 18.2 Create `ThemeContext` and `ThemeProvider`: manage dark mode toggle, apply `dark` class to root `<html>` element, persist preference via API
-- [ ] 18.3 Create `DemoContext`: track demo mode state, provide `isDemoMode` flag to all components
-- [ ] 18.4 Set up React Router v6 with public routes (`/login`, `/register`, `/invite/:token`, `/demo`) and protected routes (all others) with auth guard
-- [ ] 18.5 Create `AppLayout` component: sidebar (folder tree, Quick Access, Favorites), top bar (search input, notification bell, user menu), main content area
-- [ ] 18.6 Create `LoginPage` component: email/password form + "Sign in with Google" button
-- [ ] 18.7 Create `RegisterPage` component: email, password, club name form + "Sign up with Google" button
-- [ ] 18.8 Create `InvitationPage` component: validate token, show registration form with pre-assigned role
-- [ ] 18.9 Create `DemoBanner` component: persistent banner on all pages when in demo mode
-- [ ] 18.10 Create `UserMenu` component: dropdown with user name, role, settings link, dark mode toggle, logout
-- [ ] 18.11 Set up TanStack Query (React Query) provider with default stale times and error handling
+- [x] 18.1 Create `AuthContext` and `AuthProvider`: manage session state, expose `user`, `role`, `club`, `login()`, `logout()`, `isAuthenticated`
+- [x] 18.2 Create `ThemeContext` and `ThemeProvider`: manage dark mode toggle, apply `dark` class to root `<html>` element, persist preference via API
+- [x] 18.3 Create `DemoContext`: track demo mode state, provide `isDemoMode` flag to all components
+- [x] 18.4 Set up React Router v6 with public routes (`/login`, `/register`, `/invite/:token`, `/demo`) and protected routes (all others) with auth guard
+- [x] 18.5 Create `AppLayout` component: sidebar (folder tree, Quick Access, Favorites), top bar (search input, notification bell, user menu), main content area
+- [x] 18.6 Create `LoginPage` component: email/password form + "Sign in with Google" button
+- [x] 18.7 Create `RegisterPage` component: email, password, club name form + "Sign up with Google" button
+- [x] 18.8 Create `InvitationPage` component: validate token, show registration form with pre-assigned role
+- [x] 18.9 Create `DemoBanner` component: persistent banner on all pages when in demo mode
+- [x] 18.10 Create `UserMenu` component: dropdown with user name, role, settings link, dark mode toggle, logout
+- [x] 18.11 Set up TanStack Query (React Query) provider with default stale times and error handling
 
 ## Task 19: Frontend — File Portal, Upload, Search, and Admin Features
 
