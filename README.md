@@ -16,7 +16,9 @@ Built for **KiroHacks Cal Poly** (May 2, 2026) by **Cameron Hafer** and **Jonath
 
 ## The Problem
 
-Every college club ends up with the same mess: a shared Google Drive full of scattered folders, inconsistent naming, duplicate files, and documents nobody can find. New officers inherit chaos. Members can't locate what they need. Important files get lost.
+As former executive board members of the **Japanese Student Association (JSA)** at Cal Poly — a club with 100+ members — we experienced this problem firsthand. Every quarter, our shared Google Drive grew more chaotic: event photos dumped in the wrong folder, budget spreadsheets buried three levels deep, meeting minutes that nobody could find when we needed them. When new officers took over, they inherited a mess with no context. Members would ask for documents and we'd spend 10 minutes digging through Drive trying to locate them.
+
+This isn't unique to JSA. Every college club ends up with the same problem: scattered folders, inconsistent naming, duplicate files, and documents nobody can find. FileAtlas was built to solve the exact frustration we lived through.
 
 ## The Solution
 
