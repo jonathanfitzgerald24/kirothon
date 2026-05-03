@@ -93,7 +93,7 @@ git pull
 - [x] 7.8 Create `GET /api/v1/architecture/versions` route (Admin only): return last 10 architecture versions
 - [x] 7.9 Implement rollback in `ArchitectureService`: restore a previous version's tree snapshot, apply changes to Drive, update Metadata Store
 - [x] 7.10 Create `POST /api/v1/architecture/rollback/:versionId` route (Admin only): trigger rollback
-- [ ] 7.11 Implement file migration: Admin chooses move or copy, AI determines target category per file using Gemini 1.5 Flash, files with confidence < 50 go to "Unsorted", call Drive API `files.update` (move) or `files.copy` (copy), stream progress via SSE
+- [x] 7.11 Implement file migration: Admin chooses move or copy, AI determines target category per file using Gemini 1.5 Flash, files with confidence < 50 go to "Unsorted", call Drive API `files.update` (move) or `files.copy` (copy), stream progress via SSE
 - [ ] 7.12 Create `POST /api/v1/architecture/migrate` route (Admin only): start migration job, return job ID
 - [ ] 7.13 Create `GET /api/v1/architecture/migrate/:jobId` route (Admin only): return migration progress and summary
 - [ ] 7.14 Write property-based test for P3 (Architecture Version Monotonicity): generate sequences of activations, verify version numbers are strictly increasing
