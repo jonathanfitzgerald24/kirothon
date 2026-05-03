@@ -86,7 +86,7 @@ git pull
 - [x] 7.1 Create `server/src/services/architectureService.ts` with an `ArchitectureService` class
 - [x] 7.2 Create `POST /api/v1/architecture/select` route (Admin only): select a proposal as the working draft, store as `ArchitectureVersion` with `isDraft = true`
 - [x] 7.3 Create `PUT /api/v1/architecture/draft` route (Admin only): update the draft tree (rename, add, move, delete folders), return updated tree
-- [ ] 7.4 Create `GET /api/v1/architecture/draft/preview` route (Admin only): return the current draft tree for live preview
+- [x] 7.4 Create `GET /api/v1/architecture/draft/preview` route (Admin only): return the current draft tree for live preview
 - [ ] 7.5 Implement architecture activation in `ArchitectureService`: snapshot current active version, diff draft vs active, apply folder creates/renames/moves/deletes to Google Drive sequentially, halt on failure, update Metadata Store categories, mark new version as active
 - [ ] 7.6 Create `POST /api/v1/architecture/activate` route (Admin only): trigger activation, warn if deleting categories with files (Req 11 AC6), require confirmation
 - [ ] 7.7 Create `GET /api/v1/architecture/current` route (any authenticated user): return the active architecture tree
