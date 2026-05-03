@@ -252,7 +252,7 @@ git pull
 
 ## Task 19: Frontend — File Portal, Upload, Search, and Admin Features
 
-- [ ] 19.1 Create `FolderTree` component: recursive tree rendering categories, last-updated indicators, "New" badges, click to navigate
+- [x] 19.1 Create `FolderTree` component: recursive tree rendering categories, last-updated indicators, "New" badges, click to navigate
 - [ ] 19.2 Create `Breadcrumb` component: render ancestor chain as clickable links based on folder's `ancestors` array
 - [ ] 19.3 Create `FolderView` component: display folder contents (subfolders + files) with name, type, size, lastModified, uploader attribution
 - [ ] 19.4 Create `FolderPreviewPopover` component: triggered on 300ms hover, shows top 5 recent files + total count, dismissed on cursor leave

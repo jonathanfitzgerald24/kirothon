@@ -9,6 +9,15 @@ import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
 import { InvitationPage } from '@/pages/InvitationPage';
 import { DashboardPage } from '@/pages/DashboardPage';
+import { PortalFolderPage } from '@/pages/PortalFolderPage';
+import { PortalFilePage } from '@/pages/PortalFilePage';
+import { UploadPage } from '@/pages/UploadPage';
+import { UploadHistoryPage } from '@/pages/UploadHistoryPage';
+import { SearchPage } from '@/pages/SearchPage';
+import { AdminArchitecturePage } from '@/pages/AdminArchitecturePage';
+import { AdminUsersPage } from '@/pages/AdminUsersPage';
+import { AdminAuditPage } from '@/pages/AdminAuditPage';
+import { AdminDriveSyncPage } from '@/pages/AdminDriveSyncPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +51,15 @@ export const App = () => {
                   }
                 >
                   <Route path="/" element={<DashboardPage />} />
+                  <Route path="/portal/folder/:categoryId" element={<PortalFolderPage />} />
+                  <Route path="/portal/file/:fileId" element={<PortalFilePage />} />
+                  <Route path="/upload" element={<UploadPage />} />
+                  <Route path="/upload/history" element={<UploadHistoryPage />} />
+                  <Route path="/search" element={<SearchPage />} />
+                  <Route path="/admin/architecture" element={<AdminArchitecturePage />} />
+                  <Route path="/admin/users" element={<AdminUsersPage />} />
+                  <Route path="/admin/audit" element={<AdminAuditPage />} />
+                  <Route path="/admin/drive-sync" element={<AdminDriveSyncPage />} />
                 </Route>
               </Routes>
             </AuthProvider>
