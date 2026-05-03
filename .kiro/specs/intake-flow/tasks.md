@@ -254,7 +254,7 @@ git pull
 
 - [ ] 19.1 Create `FolderTree` component: recursive tree rendering categories, last-updated indicators, "New" badges, click to navigate
 - [x] 19.2 Create `Breadcrumb` component: render ancestor chain as clickable links based on folder's `ancestors` array
-- [ ] 19.3 Create `FolderView` component: display folder contents (subfolders + files) with name, type, size, lastModified, uploader attribution
+- [x] 19.3 Create `FolderView` component: display folder contents (subfolders + files) with name, type, size, lastModified, uploader attribution
 - [ ] 19.4 Create `FolderPreviewPopover` component: triggered on 300ms hover, shows top 5 recent files + total count, dismissed on cursor leave
 - [ ] 19.5 Create `FileDetailView` component: file preview (inline for supported types via iframe/pdf.js), metadata, uploader attribution, upload note, AI summary, tags, "Why here?" tooltip, "Files Like This" sidebar
 - [ ] 19.6 Create `TimelineView` component: files in reverse chronological order grouped by month, folder and tag filters
