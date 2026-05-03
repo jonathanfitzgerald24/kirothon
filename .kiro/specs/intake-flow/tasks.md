@@ -276,7 +276,7 @@ git pull
 - [x] 20.2 Create `ActivityFeed` component: display action type, user, affected resource, timestamp; real-time updates via SSE connection to `/activity/stream`
 - [x] 20.3 Create `ClubActivityDashboard` component (Admin only): total files, uploads last 30 days, top 3 uploaders, unresolved items count; omit zero-value widgets
 - [x] 20.4 Create `NotificationBell` component: bell icon with unread count badge
-- [ ] 20.5 Create `NotificationCenter` component: dropdown panel listing notifications with type icon, title, body, timestamp, read/dismiss actions; real-time updates via SSE
+- [x] 20.5 Create `NotificationCenter` component: dropdown panel listing notifications with type icon, title, body, timestamp, read/dismiss actions; real-time updates via SSE
 - [ ] 20.6 Create `SetupWizard` component: four-step stepper (Connect Drive, Analyze Structure, Approve Architecture, Invite Team), locked progression, progress indicator, club type selector in step 3
 - [ ] 20.7 Create `FirstLoginOrientation` component: spotlight overlay highlighting folder tree, search bar, Quick Access; auto-dismiss after 20 seconds or on click; shown once per user
 - [ ] 20.8 Create `UserSettings` component: dark mode toggle, profile info display
