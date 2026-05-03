@@ -21,9 +21,13 @@ export class SearchService {
   ) {
     const where: Record<string, unknown> = { clubId }
 
-    // Text search on name
+    // Text search on name, tags, and category name
     if (params.q) {
-      where.name = { contains: params.q, mode: 'insensitive' }
+      where.OR = [
+        { name: { contains: params.q, mode: 'insensitive' } },
+        { tags: { some: { name: { contains: params.q, mode: 'insensitive' } } } },
+        { category: { name: { contains: params.q, mode: 'insensitive' } } },
+      ]
     }
 
     if (params.type) {
