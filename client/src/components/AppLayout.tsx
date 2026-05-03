@@ -43,7 +43,7 @@ export const AppLayout = () => {
       <header className="flex h-14 shrink-0 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
         <div className="flex items-center gap-3">
           <Link to="/" className="text-lg font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400">
-            IntakeFlow
+            FileAtlas
           </Link>
         </div>
 

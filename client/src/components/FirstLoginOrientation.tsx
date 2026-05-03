@@ -28,7 +28,7 @@ export const FirstLoginOrientation = () => {
         </button>
 
         <h3 className="mb-3 text-base font-semibold text-gray-900 dark:text-gray-100">
-          Welcome to IntakeFlow
+          Welcome to FileAtlas
         </h3>
 
         <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">

@@ -9,6 +9,7 @@ import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
 import { InvitationPage } from '@/pages/InvitationPage';
 import { DashboardPage } from '@/pages/DashboardPage';
+import { BrowseFilesPage } from '@/pages/BrowseFilesPage';
 import { PortalFolderPage } from '@/pages/PortalFolderPage';
 import { PortalFilePage } from '@/pages/PortalFilePage';
 import { UploadPage } from '@/pages/UploadPage';
@@ -52,6 +53,7 @@ export const App = () => {
                   }
                 >
                   <Route path="/" element={<DashboardPage />} />
+                  <Route path="/browse" element={<BrowseFilesPage />} />
                   <Route path="/portal/folder/:categoryId" element={<PortalFolderPage />} />
                   <Route path="/portal/file/:fileId" element={<PortalFilePage />} />
                   <Route path="/upload" element={<UploadPage />} />

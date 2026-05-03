@@ -30,7 +30,7 @@ export const DashboardPage = () => {
           <Link to="/upload" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
             <Upload className="h-5 w-5 text-blue-500" /> Upload Files
           </Link>
-          <Link to="/" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
+          <Link to="/browse" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
             <FolderTree className="h-5 w-5 text-green-500" /> Browse Files
           </Link>
           <Link to="/admin/users" className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white p-3 text-sm text-gray-700 hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-700">
@@ -57,8 +57,8 @@ export const DashboardPage = () => {
             <div className="grid gap-3">
               <div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Google Drive</p>
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                  {club?.driveConnected ? 'Connected' : 'Not Connected'}
+                <p className={`text-sm font-medium ${club?.driveConnected ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>
+                  {club?.driveConnected ? '● Connected' : '○ Not Connected'}
                 </p>
                 {!club?.driveConnected && role === 'ADMIN' && (
                   <a
@@ -76,7 +76,13 @@ export const DashboardPage = () => {
               </div>
               <div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Your Role</p>
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{user?.role}</p>
+                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                  user?.role === 'ADMIN' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300' :
+                  user?.role === 'MOD' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300' :
+                  'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                }`}>
+                  {user?.role}
+                </span>
               </div>
             </div>
           </div>
