@@ -184,7 +184,7 @@ git pull
 - [ ] 13.8 Create `PUT /api/v1/ai/reorganize/suggestions/:id` route (Admin only): accept or dismiss individual suggestions
 - [x] 13.9 Implement Smart Folder Naming (Req 42): send proposed category name + existing naming patterns to Gemini 1.5 Flash, return normalized suggestion if name deviates
 - [x] 13.10 Create `POST /api/v1/ai/smart-name` route (Admin, Mod): check a proposed category name, return suggestion if applicable
-- [ ] 13.11 Create `POST /api/v1/ai/tags/:fileId` route (Admin, Mod): regenerate auto-tags for a file
+- [x] 13.11 Create `POST /api/v1/ai/tags/:fileId` route (Admin, Mod): regenerate auto-tags for a file
 - [ ] 13.12 Create `PUT /api/v1/ai/tags/:fileId` route (Admin, Mod): manually add or remove tags
 - [ ] 13.13 Write property-based test for P12 (Tag Cardinality): generate tag creation sequences, verify auto-generated tag count never exceeds 5 per file
 
