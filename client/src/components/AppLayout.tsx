@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { Search, FolderTree, Star, Zap } from 'lucide-react';
 import { UserMenu } from './UserMenu';
 import { DemoBanner } from './DemoBanner';
@@ -12,9 +12,9 @@ export const AppLayout = () => {
       {/* Top bar */}
       <header className="flex h-14 shrink-0 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-800">
         <div className="flex items-center gap-3">
-          <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          <Link to="/" className="text-lg font-semibold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400">
             IntakeFlow
-          </h1>
+          </Link>
         </div>
 
         <div className="flex flex-1 items-center justify-center px-8">

@@ -76,9 +76,13 @@ export const SetupWizard = () => {
               </div>
 
               {isCurrent && isUnlocked && (
-                <button className="rounded-lg bg-blue-600 px-3 py-1 text-xs font-medium text-white hover:bg-blue-700">
+                <a
+                  href={i === 0 ? '/api/v1/drive/connect' : undefined}
+                  onClick={i !== 0 ? undefined : undefined}
+                  className="rounded-lg bg-blue-600 px-3 py-1 text-xs font-medium text-white hover:bg-blue-700"
+                >
                   Start
-                </button>
+                </a>
               )}
             </div>
           );
