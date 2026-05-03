@@ -224,7 +224,7 @@ git pull
 
 ## Task 17: Favorites, Quick Access, and File Requests (Req 20, 23, 43)
 
-- [ ] 17.1 Create `POST /api/v1/favorites/:fileId` route (any authenticated user): add file to favorites after verifying user has access to the file
+- [x] 17.1 Create `POST /api/v1/favorites/:fileId` route (any authenticated user): add file to favorites after verifying user has access to the file
 - [ ] 17.2 Create `DELETE /api/v1/favorites/:fileId` route: remove file from favorites
 - [ ] 17.3 Create `GET /api/v1/favorites` route: return current user's favorited files, filtered to only include files the user still has permission to view
 - [ ] 17.4 Create `POST /api/v1/quick-access/:fileId` route (Admin only): pin file to Quick Access, enforce max 10 limit (return 400 if exceeded)
