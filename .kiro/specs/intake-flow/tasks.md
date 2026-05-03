@@ -174,7 +174,7 @@ git pull
 
 ## Task 13: AI Features — Tags, Summaries, Descriptions, Reorganization, Smart Naming (Req 21, 38, 39, 41, 42)
 
-- [ ] 13.1 Create `server/src/services/aiTagService.ts`: on file creation, send file name, type, and folder path to Gemini 1.5 Flash, generate up to 5 tags, store in Metadata Store
+- [x] 13.1 Create `server/src/services/aiTagService.ts`: on file creation, send file name, type, and folder path to Gemini 1.5 Flash, generate up to 5 tags, store in Metadata Store
 - [ ] 13.2 Create `server/src/services/aiSummaryService.ts`: for supported types (PDF, Google Docs, Slides, plain text) under 10MB, extract first 5,000 chars of content, send to Gemini 1.5 Flash, store one-sentence summary in `FileMeta.aiSummary`
 - [ ] 13.3 Implement folder description generation in `aiArchitect.ts`: when a category is created, generate one-sentence description via Gemini 1.5 Flash based on folder name and hierarchy position, store in `Category.description`
 - [ ] 13.4 Implement re-organization suggestions (Req 41): analyze full architecture tree + recent placements + Unsorted files via Gemini 1.5 Pro, return structured plan (files to relocate, folders to merge/rename, new categories)
