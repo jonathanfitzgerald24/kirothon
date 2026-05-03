@@ -164,7 +164,7 @@ git pull
 ## Task 12: Notifications and Real-Time (Req 45, 22)
 
 - [x] 12.1 Create `server/src/services/notificationService.ts` with a `NotificationService` class
-- [ ] 12.2 Implement notification creation: create `Notification` record, push to user's SSE connection if active
+- [x] 12.2 Implement notification creation: create `Notification` record, push to user's SSE connection if active
 - [ ] 12.3 Implement SSE infrastructure: create `GET /api/v1/notifications/stream` endpoint that holds open an SSE connection per authenticated user, manage connection pool
 - [ ] 12.4 Create `GET /api/v1/notifications` route (any authenticated user): return notifications for the current user, filtered by role-appropriate types
 - [ ] 12.5 Create `PUT /api/v1/notifications/:id/read` route: mark notification as read
