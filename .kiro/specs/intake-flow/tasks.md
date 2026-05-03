@@ -178,7 +178,7 @@ git pull
 - [x] 13.2 Create `server/src/services/aiSummaryService.ts`: for supported types (PDF, Google Docs, Slides, plain text) under 10MB, extract first 5,000 chars of content, send to Gemini 1.5 Flash, store one-sentence summary in `FileMeta.aiSummary`
 - [x] 13.3 Implement folder description generation in `aiArchitect.ts`: when a category is created, generate one-sentence description via Gemini 1.5 Flash based on folder name and hierarchy position, store in `Category.description`
 - [x] 13.4 Implement re-organization suggestions (Req 41): analyze full architecture tree + recent placements + Unsorted files via Gemini 1.5 Pro, return structured plan (files to relocate, folders to merge/rename, new categories)
-- [ ] 13.5 Implement auto-trigger for re-organization: when Unsorted folder exceeds 10 files, automatically trigger analysis and surface suggestions to Admin
+- [x] 13.5 Implement auto-trigger for re-organization: when Unsorted folder exceeds 10 files, automatically trigger analysis and surface suggestions to Admin
 - [x] 13.6 Create `GET /api/v1/ai/reorganize` route (Admin only): trigger on-demand re-organization analysis
 - [ ] 13.7 Create `GET /api/v1/ai/reorganize/suggestions` route (Admin only): return current suggestions
 - [ ] 13.8 Create `PUT /api/v1/ai/reorganize/suggestions/:id` route (Admin only): accept or dismiss individual suggestions
