@@ -26,11 +26,22 @@ export async function loadAccessibleCategories(req: Request, _res: Response, nex
   if (!req.user) { next(); return }
   const user = req.user as { id: string; role: Role; clubId: string }
 
-  const [categories, grants] = await Promise.all([
-    prisma.category.findMany({ where: { clubId: user.clubId }, select: { id: true, minimumRole: true } }),
-    prisma.accessGrant.findMany({ where: { userId: user.id }, select: { categoryId: true } }),
-  ])
+  const categories = await prisma.category.findMany({
+    where: { clubId: user.clubId },
+    select: { id: true, minimumRole: true },
+  })
 
+  // ADMIN gets access to everything
+  if (user.role === Role.ADMIN) {
+    req.accessibleCategoryIds = new Set(categories.map((c) => c.id))
+    next()
+    return
+  }
+
+  const grants = await prisma.accessGrant.findMany({
+    where: { userId: user.id },
+    select: { categoryId: true },
+  })
   const grantedIds = new Set(grants.map((g) => g.categoryId))
 
   req.accessibleCategoryIds = new Set(
@@ -42,6 +53,10 @@ export async function loadAccessibleCategories(req: Request, _res: Response, nex
 }
 
 export function checkCategoryAccess(categoryId: string, req: Request, res: Response): boolean {
+  // ADMIN bypasses access checks
+  const user = req.user as { role: Role } | undefined
+  if (user?.role === Role.ADMIN) return true
+
   if (!req.accessibleCategoryIds) return false
   if (!req.accessibleCategoryIds.has(categoryId)) {
     res.status(403).json({ error: { code: 'FORBIDDEN', message: 'Access denied to this category' } })
