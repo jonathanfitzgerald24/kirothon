@@ -83,7 +83,7 @@ git pull
 
 ## Task 7: Architecture Review, Activation, and Management (Req 5, 6, 11)
 
-- [ ] 7.1 Create `server/src/services/architectureService.ts` with an `ArchitectureService` class
+- [x] 7.1 Create `server/src/services/architectureService.ts` with an `ArchitectureService` class
 - [ ] 7.2 Create `POST /api/v1/architecture/select` route (Admin only): select a proposal as the working draft, store as `ArchitectureVersion` with `isDraft = true`
 - [ ] 7.3 Create `PUT /api/v1/architecture/draft` route (Admin only): update the draft tree (rename, add, move, delete folders), return updated tree
 - [ ] 7.4 Create `GET /api/v1/architecture/draft/preview` route (Admin only): return the current draft tree for live preview
