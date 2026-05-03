@@ -229,7 +229,7 @@ git pull
 - [x] 17.3 Create `GET /api/v1/favorites` route: return current user's favorited files, filtered to only include files the user still has permission to view
 - [x] 17.4 Create `POST /api/v1/quick-access/:fileId` route (Admin only): pin file to Quick Access, enforce max 10 limit (return 400 if exceeded)
 - [x] 17.5 Create `DELETE /api/v1/quick-access/:fileId` route (Admin only): unpin file from Quick Access
-- [ ] 17.6 Create `GET /api/v1/quick-access` route (any authenticated user): return Quick Access files with name, type, containing folder; apply role-based permission checks
+- [x] 17.6 Create `GET /api/v1/quick-access` route (any authenticated user): return Quick Access files with name, type, containing folder; apply role-based permission checks
 - [ ] 17.7 Create `POST /api/v1/file-requests` route (Member only): submit a file request with description
 - [ ] 17.8 Create `GET /api/v1/file-requests` route (Admin, Mod): list open file requests
 - [ ] 17.9 Create `PUT /api/v1/file-requests/:id/fulfill` route (Admin, Mod): link an uploaded file to a request, notify the requesting member
