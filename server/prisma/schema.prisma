@@ -198,6 +198,7 @@ model Favorite {
 model QuickAccessFile {
   id        String   @id @default(uuid())
   clubId    String
+  club      Club     @relation(fields: [clubId], references: [id])
   fileId    String   @unique
   file      FileMeta @relation(fields: [fileId], references: [id], onDelete: Cascade)
   sortOrder Int      @default(0)
