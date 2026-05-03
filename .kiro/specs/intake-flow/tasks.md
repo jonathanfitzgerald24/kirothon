@@ -31,7 +31,7 @@ git pull
 - [x] 2.16 Define `StructuralDrift` model: id, clubId, changeType, drivePath, driveId, resolved, resolution, createdAt
 - [x] 2.17 Define `AccessRequest` model: id, userId, categoryId, status (default PENDING), resolvedBy, resolvedAt, createdAt
 - [x] 2.18 Add database indexes on `FileMeta`: (clubId, categoryId), (clubId, name), (clubId, uploadedAt), (clubId, uploaderId); on `Category`: (clubId, parentId); on `Tag`: (name)
-- [ ] 2.19 Run `prisma migrate dev` to generate and apply the initial migration
+- [-] 2.19 Run `prisma migrate dev` to generate and apply the initial migration
 - [ ] 2.20 Create `server/src/prisma/seed.ts` with demo mode seed data: sample club, users, categories, files, tags
 
 ## Task 3: Authentication and Session Management (Req 1, 19)
